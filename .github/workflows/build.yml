@@ -2,8 +2,7 @@ name: Build palen1x
 
 on:
   push:
-    paths:
-      - 'build.sh'
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
