@@ -1,0 +1,51 @@
+#!/bin/sh
+# Load functions and variables
+. /usr/bin/common
+arg=$(cat /usr/bin/.args)
+args=$(echo $arg)
+
+export NEWT_COLORS='root=,black
+border=white,black
+title=white,black
+roottext=red,black
+window=red,black
+textbox=white,black
+button=black,green
+compactbutton=white,black
+listbox=white,black
+actlistbox=black,white
+actsellistbox=black,green
+checkbox=green,black
+actcheckbox=black,green
+'
+
+whiptail_height="$(($(tput lines) - 6))"
+whiptail_width="$(($(tput cols) - 20))"
+
+while true; do
+  CHOICE="$(whiptail --nocancel --title "palera1n | use arrow keys" --menu \
+    "
+  Arguments: $args" $whiptail_height $whiptail_width 8 \
+    '1' 'Start' \
+    '2' 'Options' \
+    '3' 'Exit' 3>&1 1>&2 2>&3)"
+  case "$CHOICE" in
+    1)
+      clear
+      /usr/local/bin/palera1n $args
+      sleep 2
+      echo ''
+      enter_to_quit
+      /usr/bin/palera1n_menu
+      echo "Do 'exit' after you're done."
+      ;;
+    2)
+      clear
+      /usr/bin/palera1n_options
+      ;;
+    3)
+      clear
+      /usr/bin/palen1x_menu
+      ;;
+  esac
+done

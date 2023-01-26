@@ -1,0 +1,47 @@
+#!/bin/sh
+# Load functions and variables
+#. /usr/bin/common
+
+export NEWT_COLORS='root=,black
+border=white,black
+title=white,black
+roottext=red,black
+window=red,black
+textbox=white,black
+button=black,green
+compactbutton=white,black
+listbox=white,black
+actlistbox=black,white
+actsellistbox=black,green
+checkbox=green,black
+actcheckbox=black,green
+'
+
+rm -r /home/.args
+whiptail_height="$(($(tput lines) - 6))"
+whiptail_width="$(($(tput cols) - 20))"
+
+OPTIONS="$(whiptail --separate-output --nocancel --ok-button "" --title "palera1n options" --checklist \
+"Press spacebar to select option, and enter to complete" 15 54 5 \
+"1" "Verbose" OFF \
+"2" "Safe Mode" OFF \
+"3" "Restore Rootfs" OFF \
+"4" "Dfu Helper" OFF \
+"5" "Debug" ON 3>&1 1>&2 2>&3)"
+if [ $? = 0 ]; then
+    output=""
+    for OPTION in $OPTIONS; do
+        case $OPTION in
+            "1") output1="-V";;
+            "2") output2="-s";;
+            "3") output3="--force-revert";;
+            "4") output4="-D";;
+            "5") output5="-v";;
+        esac
+    done
+# this is the output of selected options, want them to be in palera1n_menu
+    echo "$output1 $output2 $output3 $output4 $output5" > /usr/bin/.args
+    /usr/bin/palera1n_menu
+else
+    echo "Cancelled"
+fi

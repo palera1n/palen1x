@@ -1,0 +1,61 @@
+#!/bin/sh
+# Load functions and variables
+. /usr/bin/common
+
+# export NEWT_COLORS='root=,black border=white,black window=white,black title=white,black textbox=white,black listbox=white,black'
+
+export NEWT_COLORS='root=,black
+border=white,black
+title=white,black
+roottext=red,black
+window=red,black
+textbox=white,black
+button=black,green
+compactbutton=white,black
+listbox=white,black
+actlistbox=black,white
+actsellistbox=black,green
+checkbox=green,black
+actcheckbox=black,green
+'
+
+whiptail_height="$(($(tput lines) - 6))"
+whiptail_width="$(($(tput cols) - 20))"
+
+while true; do
+  CHOICE="$(whiptail --nocancel --title "palen1x $PALEN1X_VERSION | use arrow keys" --menu '' $whiptail_height $whiptail_width 8 \
+    '1' 'palera1n' \
+    '2' 'Bootstrap' \
+    '3' 'SSH' \
+    '4' 'Shell' \
+    '5' 'Shut down' \
+    '6' 'Reboot' 3>&1 1>&2 2>&3)"
+  case "$CHOICE" in
+    1)
+      clear
+      /usr/bin/palera1n_menu
+      ;;
+    2)
+      clear
+      break
+      ;;
+    3)
+      clear
+      /usr/bin/ssh_into_ios
+      ;;
+    4)
+      clear
+      break
+      ;;
+    5)
+      palen1x_logo
+      sleep 2
+      /usr/sbin/shutdown now
+      ;;
+    6)
+      palen1x_logo
+      sleep 2
+      /usr/sbin/reboot
+      ;;
+  esac
+done
