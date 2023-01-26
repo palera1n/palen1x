@@ -9,7 +9,6 @@ Connect your iDevice to this computer
 
 The keyboard layout is in American Qwerty.
 Your iDevice's default password is alpine.
-Your iDevice's default port is 44.
 
 EOF
 prompt 'User: ' user

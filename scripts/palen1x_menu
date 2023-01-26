@@ -25,11 +25,10 @@ whiptail_width="$(($(tput cols) - 20))"
 while true; do
   CHOICE="$(whiptail --nocancel --title "palen1x $PALEN1X_VERSION | use arrow keys" --menu '' $whiptail_height $whiptail_width 8 \
     '1' 'palera1n' \
-    '2' 'Bootstrap' \
-    '3' 'SSH' \
-    '4' 'Shell' \
-    '5' 'Shut down' \
-    '6' 'Reboot' 3>&1 1>&2 2>&3)"
+    '2' 'SSH' \
+    '3' 'Shell' \
+    '4' 'Shut down' \
+    '5' 'Reboot' 3>&1 1>&2 2>&3)"
   case "$CHOICE" in
     1)
       clear
@@ -37,22 +36,18 @@ while true; do
       ;;
     2)
       clear
-      break
+      /usr/bin/ssh_into_ios
       ;;
     3)
       clear
-      /usr/bin/ssh_into_ios
-      ;;
-    4)
-      clear
       break
       ;;
-    5)
+    4)
       palen1x_logo
       sleep 2
       /usr/sbin/shutdown now
       ;;
-    6)
+    5)
       palen1x_logo
       sleep 2
       /usr/sbin/reboot
