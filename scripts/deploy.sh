@@ -22,9 +22,9 @@ fi
 
 version=$(sysctl -n kern.osrelease)
 
-if [[ $version == 21* ]]; then
+if [[ $version == 21.* ]]; then
   value=1800
-elif [[ $version == 22* ]]; then
+elif [[ $version == 22.* ]]; then
   value=1900
 else
   exit
