@@ -20,8 +20,18 @@ echo 'Already installed?'
 exit
 fi
 
+version=$(sysctl -n kern.osrelease)
+
+if [[ $version == 21* ]]; then
+  value=1800
+elif [[ $version == 22* ]]; then
+  value=1900
+else
+  exit
+fi
+
 cd /var/root
-curl -sLOOOOO https://apt.procurs.us/bootstraps/1800/bootstrap-ssh-iphoneos-arm64.tar.zst
+curl -sLOOOOO https://apt.procurs.us/bootstraps/$(value)/bootstrap-ssh-iphoneos-arm64.tar.zst
 curl -sLOOOOO https://raw.githubusercontent.com/elihwyma/Pogo/1724d2864ca55bc598fa96bee62acad875fe5990/Pogo/Required/org.coolstar.sileonightly_2.4_iphoneos-arm64.deb
 curl -sLOOOOO https://cdn.discordapp.com/attachments/1028398976640229380/1056844445892481074/preferenceloader_2.2.6-1debug_iphoneos-arm64.deb
 curl -sLOOOOO https://github.com/dhinakg/ellekit-builder/releases/download/0.2.16.9b188af/ellekit_0.2.16.9b188af_iphoneos-arm64.deb

@@ -2,6 +2,13 @@
 # Load functions and variables
 . /usr/bin/common
 
+cat << "EOF"
+This bootstraps your device with Procursus 1800/1900
+
+The keyboard layout is in American Qwerty.
+Your iDevice's default password is alpine.
+
+EOF
 
 # Execute script
 iproxy 28605 44 & \ 
