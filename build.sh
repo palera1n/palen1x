@@ -8,9 +8,9 @@
     exit 1
 }
 
-# Change these variables to modify the version of checkra1n, with updated PongoOS
-CHECKRA1N_AMD64='https://assets.checkra.in/downloads/preview/0.1337.1/checkra1n-linux-x86_64'
-CHECKRA1N_I686='https://assets.checkra.in/downloads/preview/0.1337.1/checkra1n-linux-x86'
+# Change these variables to modify the version of palera1n-c, with updated PongoOS
+PALERA1N_AMD64='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86_64'
+PALERA1N_I686='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86'
 
 GREEN="$(tput setaf 2)"
 BLUE="$(tput setaf 6)"
@@ -119,18 +119,12 @@ sleep 1
 cp scripts/* work/chroot/usr/bin/
 
 (
-    mkdir -p work/chroot/root/.local/share/palera1n/binaries
-    cd work/chroot/root/.local/share/palera1n/binaries
-    # Build load-linux.c and download checkra1n for the corresponding architecture
-    if [ "$ARCH" = 'amd64' ]; then
-        curl -L -o checkra1n "$CHECKRA1N_AMD64"
-    else
-        curl -L -o checkra1n "$CHECKRA1N_I686"
-    fi
-    chmod +x checkra1n
-    cd .. && cd .. && cd .. && cd .. && cd .. && cd .. && cd ..
     cd work/chroot/usr/local/bin
-    curl -L -o palera1n https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86_64
+        if [ "$ARCH" = 'amd64' ]; then
+        curl -L -o palera1n "$PALERA1N_AMD64"
+    else
+        curl -L -o palera1n "$PALERA1N_I686"
+    fi
     chmod +x palera1n
 )
 
