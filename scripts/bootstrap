@@ -11,8 +11,8 @@ Your iDevice's default password is alpine.
 EOF
 
 # Execute script
-iproxy 28605 44 & \ 
-scp -O -P28605 -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /usr/local/bin/deploy.sh root@127.0.0.1:/private/var/root & ssh root@localhost -p28605 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /var/root && ./deploy.sh"
+iproxy 28604 44 & \ 
+scp -P28604 -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /usr/local/bin/deploy.sh root@127.0.0.1:/private/var/root & ssh root@127.0.0.1 -P28604 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /var/root && ./deploy.sh"
 
 sleep 2
 echo ''
