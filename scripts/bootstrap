@@ -13,6 +13,6 @@ EOF
 IPROXY=$(iproxy 28605 44 >/dev/null 2>&1 & echo $!)
 # Execute script
 
-scp -P28604 -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /bin/deploy.sh root@127.0.0.1:/private/var/root 
+scp -qp28605 -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /bin/deploy.sh root@127.0.0.1:/private/var/root 
 
-ssh root@127.0.0.1 -P28604 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /var/root && ./deploy.sh"
+ssh root@127.0.0.1 -qp28605 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /var/root && ./deploy.sh"
