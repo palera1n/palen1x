@@ -7,13 +7,12 @@ This bootstraps your device with Procursus 1800/1900
 
 The keyboard layout is in American Qwerty.
 Your iDevice's default password is alpine.
+Press Ctrl + C to quit.
 
 EOF
 
 # Execute script
 iproxy 28604 44 & \ 
-scp -P28604 -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /bin/deploy.sh root@127.0.0.1:/private/var/root & ssh root@127.0.0.1 -P28604 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /var/root && ./deploy.sh"
-
-sleep 2
-echo ''
-enter_to_quit
+scp -P28604 -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /bin/deploy.sh root@127.0.0.1:/private/var/root 
+iproxy 28604 44 & \ 
+ssh root@127.0.0.1 -P28604 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /var/root && ./deploy.sh"

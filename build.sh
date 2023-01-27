@@ -18,7 +18,7 @@ NORMAL="$(tput sgr0)"
 cat << EOF
 ${GREEN}############################################${NORMAL}
 ${GREEN}#                                          #${NORMAL}
-${GREEN}#  ${BLUE}Welcome to the palen1x build script  ${GREEN}#${NORMAL}
+${GREEN}#  ${BLUE}Welcome to the palen1x build script     ${GREEN}#${NORMAL}
 ${GREEN}#                                          #${NORMAL}
 ${GREEN}############################################${NORMAL}
 
