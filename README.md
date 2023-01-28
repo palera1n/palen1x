@@ -10,7 +10,8 @@
     <a href="#usage">Usage</a> •
     <a href="#building-palen1x">Building palen1x</a> •
     <a href="#contributing">Contributing</a> •
-    <a href="#credits">Credits</a>
+    <a href="#credits">Credits</a> •
+    <a href="https://github.com/palera1n/palen1x/blob/main/CHANGELOG.md">Changelog</a> 
 </p>
 
 <p align="center">
@@ -18,9 +19,11 @@
 </p>
 
 -------
+# Warning
+[palera1n-c](https://github.com/palera1n/palera1n-c) *may* not be ready to use, **use at your own risk**.
 
 # Usage
-**Make an [iCloud/iTunes backup](https://support.apple.com/en-us/HT203977) before using palen1x, so that you can go back if something goes wrong.**
+**Make an [iCloud/iTunes backup](https://support.apple.com/en-us/HT203977) before using palen1x, so that you can go back if something goes wrong**.
 
 The `amd64` iso is for 64-bit CPUs (AMD and Intel) and the `i686` one is for 32-bit CPUs. If you are unsure which one to download, the `amd64` ISO will work in most cases.
 
@@ -31,7 +34,8 @@ The `amd64` iso is for 64-bit CPUs (AMD and Intel) and the `i686` one is for 32-
 
 # Building palen1x
 
-To change the version of checkra1n, edit `CRSOURCE_amd64` and `CRSOURCE_i686`.\
+To change the version of palen1x, either change `version` file, or manually specify it with `./build.sh`.
+
 Execute these commands on a Debian-based system.
 ```
 git clone https://github.com/palera1n/palen1x.git
@@ -40,7 +44,7 @@ sudo ./build.sh
 ```
 
 # Contributing
-Any contribution is always welcome :)
+Any contribution is always welcome :3
 
 # Credits
 - [palera1n Patreons](https://github.com/palera1n/palera1n#patreons)
