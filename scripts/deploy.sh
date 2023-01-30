@@ -1,5 +1,6 @@
 #!/cores/binpack/bin/sh
 
+# Check if you can use it
 if stat /.procursus_strapped >/dev/null 2>&1; then
 echo 'WTF.. (Dont install on root)'
 exit
@@ -30,40 +31,51 @@ else
   exit
 fi
 
+# Download bootstrap, along with other packages
 cd /var/root
 curl -sLOOOOO https://apt.procurs.us/bootstraps/$(value)/bootstrap-ssh-iphoneos-arm64.tar.zst
 curl -sLOOOOO https://raw.githubusercontent.com/elihwyma/Pogo/1724d2864ca55bc598fa96bee62acad875fe5990/Pogo/Required/org.coolstar.sileonightly_2.4_iphoneos-arm64.deb
-curl -sLOOOOO https://cdn.discordapp.com/attachments/1028398976640229380/1056844445892481074/preferenceloader_2.2.6-1debug_iphoneos-arm64.deb
-curl -sLOOOOO https://github.com/dhinakg/ellekit-builder/releases/download/0.2.16.9b188af/ellekit_0.2.16.9b188af_iphoneos-arm64.deb
+curl -sLOOOOO https://cdn.discordapp.com/attachments/1028398976640229380/1068982161568440340/preferenceloader_2.2.6-7debug_iphoneos-arm64.deb
 zstd -d bootstrap-ssh-iphoneos-arm64.tar.zst
+sleep 2
 
-sleep 3
-
+# Move bootstrap, mount necessary directories
 mount -uw /private/preboot
 mkdir /private/preboot/tempdir
 tar --preserve-permissions -xkf bootstrap-ssh-iphoneos-arm64.tar -C /private/preboot/tempdir
 mv -v /private/preboot/tempdir/var/jb /private/preboot/$(cat /private/preboot/active)/procursus
-sleep 1
+
+# Make symlink to var/jb, and prep_bootstrap
 ln -s /private/preboot/$(cat /private/preboot/active)/procursus /var/jb
 rm -rf /private/preboot/tempdir
 source /var/jb/etc/profile
-echo balls
 sleep 1
 /var/jb/prep_bootstrap.sh
 /var/jb/usr/libexec/firmware
 
+# Install packages
 echo "Installing Sileo-Nightly and upgrading Procursus packages..."
 dpkg -i org.coolstar.sileonightly_2.4_iphoneos-arm64.deb > /dev/null
+dpkg -i preferenceloader_2.2.6-7debug_iphoneos-arm64.deb > /dev/null
 uicache -p /var/jb/Applications/Sileo-Nightly.app
-echo balls2
+
+# Echo palera1n repo to procursus sources, update sources, & remove leftovers
+{
+    echo "Types: deb"
+    echo "URIs: https://repo.palera.in/"
+    echo "Suites: ./"
+    echo "Components:"
+    echo ""   
+} >> /var/jb/etc/apt/sources.list.d/procursus.sources
 sleep 1
 apt-get update -o Acquire::AllowInsecureRepositories=true
 apt-get dist-upgrade -y --allow-downgrades --allow-unauthenticated
 
 rm org.coolstar.sileonightly_2.4_iphoneos-arm64.deb
+rm preferenceloader_2.2.6-7debug_iphoneos-arm64.deb
 rm bootstrap-ssh-iphoneos-arm64.tar
 rm bootstrap-ssh-iphoneos-arm64.tar.zst
 
 echo Rebooting...
-sleep 3
+sleep 2
 launchctl reboot userspace
