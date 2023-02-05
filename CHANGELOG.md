@@ -1,6 +1,12 @@
 # Changelog
 
+## 1.0.4
+- Added `Switch` option to palera1n_menu, making you able to switch from and to rootless or rootful.
+- Added `Jailbreak Type:` to palera1n_menu
+- Renamed bootstrap script to include rootless in it
+
 ## 1.0.3
+- Seperate bootstrap command for rootless & rootful
 - Bump version for fixed rootless loader
 - Added `CHANGELOG.md`
 - Removed `move.sh`, no longer using parallels for building

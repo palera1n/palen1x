@@ -1,0 +1,33 @@
+#!/bin/bash
+jbt=$(cat /usr/bin/.jbtype)
+jbtype=$(echo $jbt)
+export NEWT_COLORS='root=,black
+border=white,black
+title=white,black
+roottext=red,black
+window=red,black
+textbox=white,black
+button=black,green
+compactbutton=white,black
+listbox=white,black
+actlistbox=black,white
+actsellistbox=black,green
+checkbox=green,black
+actcheckbox=black,green
+'
+
+jbtype="$(whiptail --backtitle 'Only use this if you know what you are doing. This will also wipe your chosen args. ' --title 'Jailbreak type' --menu '' 0 0 0 'Rootful' '' 'Rootless' '' 3>&1 1>&2 2>&3)"
+case "$jbtype" in
+  "Rootful")
+    echo "Rootful selected"
+    echo "Rootful" > /usr/bin/.jbtype
+    rm -r /usr/bin/.args
+    /usr/bin/palera1n_menu
+    ;;
+  "Rootless")
+    echo "Rootless selected"
+    echo "Rootless" > /usr/bin/.jbtype
+    rm -r /usr/bin/.args
+    /usr/bin/palera1n_menu
+    ;;
+esac

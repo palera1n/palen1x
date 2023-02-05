@@ -3,6 +3,8 @@
 . /usr/bin/common
 arg=$(cat /usr/bin/.args)
 args=$(echo $arg)
+jbt=$(cat /usr/bin/.jbtype)
+jbtype=$(echo $jbt)
 
 export NEWT_COLORS='root=,black
 border=white,black
@@ -22,13 +24,16 @@ actcheckbox=black,green
 whiptail_height="$(($(tput lines) - 6))"
 whiptail_width="$(($(tput cols) - 20))"
 
+if [ "$jbtype" = "Rootless" ]; then
 while true; do
   CHOICE="$(whiptail --nocancel --title "palera1n | use arrow keys" --menu \
     "
+  Jailbreak Type: $jbtype
   Arguments: $args" $whiptail_height $whiptail_width 8 \
     '1' 'Start' \
     '2' 'Options' \
-    '3' 'Exit' 3>&1 1>&2 2>&3)"
+    '3' 'Switch' \
+    '4' 'Exit' 3>&1 1>&2 2>&3)"
   case "$CHOICE" in
     1)
       clear
@@ -45,7 +50,46 @@ while true; do
       ;;
     3)
       clear
+      /usr/bin/palera1n_switch
+      ;;
+    4)
+      clear
       /usr/bin/palen1x_menu
       ;;
   esac
 done
+elif [ "$jbtype" = "Rootful" ]; then
+while true; do
+  CHOICE="$(whiptail --nocancel --title "palera1n | use arrow keys" --menu \
+    "
+  Jailbreak Type: $jbtype
+  Arguments: -f $args" $whiptail_height $whiptail_width 8 \
+    '1' 'Start' \
+    '2' 'Options' \
+    '3' 'Switch' \
+    '4' 'Exit' 3>&1 1>&2 2>&3)"
+  case "$CHOICE" in
+    1)
+      clear
+      /usr/local/bin/palera1n -f $args
+      sleep 2
+      echo ''
+      enter_to_quit
+      /usr/bin/palera1n_menu
+      echo "Do 'exit' after you're done."
+      ;;
+    2)
+      clear
+      /usr/bin/palera1n_options
+      ;;
+    3)
+      clear
+      /usr/bin/palera1n_switch
+      ;;
+    4)
+      clear
+      /usr/bin/palen1x_menu
+      ;;
+  esac
+done
+fi
