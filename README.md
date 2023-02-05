@@ -27,7 +27,7 @@
 
 -------
 # Warning
-[palera1n-c](https://github.com/palera1n/palera1n-c) *may* not be ready to use, **use at your own risk**.
+[palera1n-c](https://github.com/palera1n/palera1n-c) / palen1x will never work in VirtualBox, VMware or any virtual machine that doesn't support a PCI passthrough. If you recieve a `[Segmentation Fault]` that's on you.
 
 # Usage
 **Make an [iCloud/iTunes backup](https://support.apple.com/en-us/HT203977) before using palen1x, so that you can go back if something goes wrong**.
