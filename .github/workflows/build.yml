@@ -32,13 +32,13 @@ jobs:
         for i in *.iso; do mv $i palen1x; done
     
     - name: Upload artifact
-      uses: wangyucode/sftp-upload-action@v1.4.8
-      with:
-        host: ${{ secrets.MINEEK_FTP_HOST }}
-        port: 22
-        username: mineekfiles
-        password: ${{ secrets.MINEEK_FTP_PASS }}
-        forceUpload: true
-        dryRun: false
-        localDir: 'palen1x/'
-        remoteDir: '/uploads/palera1n/artifacts/palen1x'
+        uses: wangyucode/sftp-upload-action@v1.4.8
+        with:
+          host: ${{ secrets.NICKCHAN_FTP_HOST }}
+          port: ${{ secrets.NICKCHAN_FTP_PORT }}
+          username: palera1n
+          privateKey: ${{ secrets.NICKCHAN_FTP_KEY }}
+          forceUpload: true
+          dryRun: false
+          localDir: 'palen1x/'
+          remoteDir: '/palera1n/artifacts/palen1x'
