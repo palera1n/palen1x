@@ -26,8 +26,8 @@ if [ "$jbtype" = "Rootless" ]; then
   "Press spacebar to select option, and enter to complete" 15 54 5 \
   "1" "Verbose" OFF \
   "2" "Safe Mode" OFF \
-  "3" "Restore Rootfs" OFF \
-  "4" "Dfu Helper" OFF \
+  "3" "Force Revert" OFF \
+  "4" "DFU Helper" OFF \
   "5" "Debug" ON 3>&1 1>&2 2>&3)"
   if [ $? = 0 ]; then
       output=""
