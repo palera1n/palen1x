@@ -58,7 +58,7 @@ Thank you so much to our Patreons that make the future development possible! You
 
 <a href="https://github.com/samh06"><img width=64 src="https://user-images.githubusercontent.com/18669106/206333607-881d7ca1-f3bf-4e18-b620-25de0c527315.png"></img></a>
 <a href="https://havoc.app"><img width=64 src="https://docs.havoc.app/img/standard_icon.png"></img></a>
-<a href="https://twitter.com/yyyyyy_public"><img width=64  src="https://pbs.twimg.com/profile_images/1429332550112079876/dQQgsURc_400x400.jpg"></img></a>
+<a href="https://twitter.com/yyyyyy_public"><img width=64  src="https://cdn.discordapp.com/attachments/1054239098006683688/1072587455779328040/image.png?size=400"></img></a>
 <a href="https://twitter.com/0xSp00kyb0t"><img width=64  src="https://pbs.twimg.com/profile_images/1603601553226620935/1t4yD1bD_400x400.jpg"></img></a>
 <a href="https://chariz.com"><img width=64 src="https://chariz.com/img/favicon.png"></img></a>
 <a href="https://twitter.com/stars6220"><img width=64  src="https://pbs.twimg.com/profile_images/1621062976982728706/pWVZQ-NO_400x400.jpg"></img></a>
