@@ -4,6 +4,7 @@
 - Added `Switch` option to palera1n_menu, making you able to switch from and to rootless or rootful.
 - Added `Jailbreak Type:` to palera1n_menu
 - Renamed bootstrap script to include rootless in it
+- Added `Serial=3` to options menu.
 
 ## 1.0.3
 - Seperate bootstrap command for rootless & rootful
