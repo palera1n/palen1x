@@ -38,12 +38,12 @@ if [ "$jbtype" = "Rootless" ]; then
               "2") output2="-s";;
               "3") output3="--force-revert";;
               "4") output4="-D";;
-              "5") output4="-e 'serial=3'";;
-              "6") output5="-v";;
+              "5") output5="-e 'serial=3'";;
+              "6") output6="-v";;
           esac
       done
 # this is the output of selected options, want them to be in palera1n_menu
-      echo "$output1 $output2 $output3 $output4 $output5" > /usr/bin/.args
+      echo "$output1 $output2 $output3 $output4 $output5 $output6" > /usr/bin/.args
       /usr/bin/palera1n_menu
   else
       echo "Cancelled"
@@ -63,16 +63,16 @@ elif [ "$jbtype" = "Rootful" ]; then
       for OPTION in $OPTIONS; do
           case $OPTION in
               "1") output1="-c";;
-              "2") output1="-V";;
-              "3") output2="-s";;
-              "4") output3="--force-revert";;
-              "5") output4="-D";;
-              "6") output4="-e 'serial=3'";;
-              "7") output5="-v";;
+              "2") output2="-V";;
+              "3") output3="-s";;
+              "4") output4="--force-revert";;
+              "5") output5="-D";;
+              "6") output6="-e 'serial=3'";;
+              "7") output7="-v";;
           esac
       done
 # this is the output of selected options, want them to be in palera1n_menu
-      echo "$output1 $output2 $output3 $output4 $output5 $output6" > /usr/bin/.args
+      echo "$output1 $output2 $output3 $output4 $output5 $output6 $output7" > /usr/bin/.args
       /usr/bin/palera1n_menu
   else
       echo "Cancelled"
