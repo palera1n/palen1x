@@ -54,8 +54,18 @@ sudo ./build.sh
 Any contribution is always welcome :3
 
 # Credits
-Thank you so much to our Patreons that make the future development possible! You may sub [here](https://patreon.com/palera1n), if you'd like to.
 
+- Asineth for [checkn1x](https://github.com/asineth0/checkn1x)
+- The checkra1n team for [checkra1n](https://checkra.in)
+- raspberryenvoie for [odysseyn1x](https://github.com/raspberryenvoie/odysseyn1x)
+- [The Procursus Team](https://github.com/ProcursusTeam/) for [Procursus](https://github.com/ProcursusTeam/Procursus)
+- [Everyone else who contributed to palen1x](https://github.com/palera1n/palen1x/graphs/contributors) & [palera1n-c](https://github.com/palera1n/palera1n-c/graphs/contributors)
+
+<br>
+<p align="center">
+Thank you so much to our Patreons that make the future development possible! You may sub <a href="https://patreon.com/palera1n">here</a>, if you'd like to.</br>
+</p>
+<p align="center">
 <a href="https://github.com/samh06"><img width=64 src="https://user-images.githubusercontent.com/18669106/206333607-881d7ca1-f3bf-4e18-b620-25de0c527315.png"></img></a>
 <a href="https://havoc.app"><img width=64 src="https://docs.havoc.app/img/standard_icon.png"></img></a>
 <a href="https://twitter.com/yyyyyy_public"><img width=64  src="https://cdn.discordapp.com/attachments/1054239098006683688/1072587455779328040/image.png?size=400"></img></a>
@@ -66,10 +76,4 @@ Thank you so much to our Patreons that make the future development possible! You
 <a href="https://twitter.com/0x7FF7"><img width=64 src="https://pbs.twimg.com/profile_images/1616888462665306113/AsjJvtyt_400x400.jpg"></img></a>
 <a href="https://sideloadly.io/"><img width=64 src="https://sideloadly.io/icon.png"></img></a>
 <a href="https://blog.stevesec.com/"><img width=64 src="https://blog.stevesec.com/img/avatar.jpg"></img></a>
-
-### Other credits:
-- Asineth for [checkn1x](https://github.com/asineth0/checkn1x)
-- The checkra1n team for [checkra1n](https://checkra.in)
-- raspberryenvoie for [odysseyn1x](https://github.com/raspberryenvoie/odysseyn1x)
-- [The Procursus Team](https://github.com/ProcursusTeam/) for [Procursus](https://github.com/ProcursusTeam/Procursus)
-- [Everyone else who contributed to palen1x](https://github.com/palera1n/palen1x/graphs/contributors) & [palera1n-c](https://github.com/palera1n/palera1n-c/graphs/contributors)
+</p>
