@@ -28,7 +28,8 @@ if [ "$jbtype" = "Rootless" ]; then
   "2" "Safe Mode" OFF \
   "3" "Force Revert" OFF \
   "4" "DFU Helper" OFF \
-  "5" "Debug" ON 3>&1 1>&2 2>&3)"
+  "5" "Serial" OFF \
+  "6" "Debug" ON 3>&1 1>&2 2>&3)"
   if [ $? = 0 ]; then
       output=""
       for OPTION in $OPTIONS; do
@@ -37,7 +38,8 @@ if [ "$jbtype" = "Rootless" ]; then
               "2") output2="-s";;
               "3") output3="--force-revert";;
               "4") output4="-D";;
-              "5") output5="-v";;
+              "5") output4="-e 'serial=3'";;
+              "6") output5="-v";;
           esac
       done
 # this is the output of selected options, want them to be in palera1n_menu
@@ -54,7 +56,8 @@ elif [ "$jbtype" = "Rootful" ]; then
   "3" "Safe Mode" OFF \
   "4" "Restore RootFS" OFF \
   "5" "DFU Helper" OFF \
-  "6" "Debug" ON 3>&1 1>&2 2>&3)"
+  "6" "Serial" OFF \
+  "7" "Debug" ON 3>&1 1>&2 2>&3)"
   if [ $? = 0 ]; then
       output=""
       for OPTION in $OPTIONS; do
@@ -64,7 +67,8 @@ elif [ "$jbtype" = "Rootful" ]; then
               "3") output2="-s";;
               "4") output3="--force-revert";;
               "5") output4="-D";;
-              "6") output5="-v";;
+              "6") output4="-e 'serial=3'";;
+              "7") output5="-v";;
           esac
       done
 # this is the output of selected options, want them to be in palera1n_menu
