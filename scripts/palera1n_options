@@ -52,8 +52,8 @@ elif [ "$jbtype" = "Rootful" ]; then
   "1" "Create Fakefs" OFF \
   "2" "Verbose" OFF \
   "3" "Safe Mode" OFF \
-  "4" "Restore Rootfs" OFF \
-  "5" "Dfu Helper" OFF \
+  "4" "Restore RootFS" OFF \
+  "5" "DFU Helper" OFF \
   "6" "Debug" ON 3>&1 1>&2 2>&3)"
   if [ $? = 0 ]; then
       output=""
