@@ -83,7 +83,7 @@ echo "deb http://archive.ubuntu.com/ubuntu bionic main universe" >> work/chroot/
 apt update
 sleep 1
 apt-get install -y --no-install-recommends linux-image-$KERNEL_ARCH live-boot \
-  systemd systemd-sysv gcc usbmuxd curl usbutils libusbmuxd-tools openssh-client sshpass xz-utils whiptail
+  systemd systemd-sysv gcc usbmuxd gpm curl usbutils libusbmuxd-tools openssh-client sshpass xz-utils whiptail
 
 # Remove apt as it won't be usable anymore
 sleep 1
