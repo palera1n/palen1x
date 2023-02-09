@@ -14,20 +14,17 @@
     <a href="https://github.com/palera1n/palen1x/blob/main/CHANGELOG.md">Changelog</a> 
 </p>
 <p align="center">
-    <img src="https://cdn.discordapp.com/attachments/1017854329887129611/1068153144305008730/IMG_0807.png" alt="screenshot" width="950">
+    <a href="https://cdn.nickchan.lol/palera1n/artifacts/palen1x">Download</a> •
+    <a href="https://dsc.gg/palera1n">Support</a> 
 </p>
+
 <p align="center">
-  <a href="#">
-    <img src="https://img.shields.io/badge/made%20with-love-E760A4.svg" alt="Made with love">
-  </a>
-  <a href="https://dsc.gg/palera1n" target="_blank">
-    <img src="https://img.shields.io/discord/1028398973452570725?label=discord" alt="Discord">
-  </a>
+    <img src="https://cdn.discordapp.com/attachments/1017854329887129611/1068153144305008730/IMG_0807.png" alt="screenshot" width="950">
 </p>
 
 -------
 # Warning
-[palera1n-c](https://github.com/palera1n/palera1n-c) / palen1x will never work in VirtualBox, VMware or any virtual machine that doesn't support a PCI passthrough. If you recieve a `[Segmentation Fault]` that's on you.
+[palera1n-c](https://github.com/palera1n/palera1n-c) / palen1x will never work in VirtualBox, VMware or any virtual machine that doesn't support a PCI passthrough. If you recieve a `Segmentation Fault` that's on you.
 
 # Usage
 **Make an [iCloud/iTunes backup](https://support.apple.com/en-us/HT203977) before using palen1x, so that you can go back if something goes wrong**.
