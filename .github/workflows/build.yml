@@ -18,11 +18,6 @@ jobs:
           sed -i "/Exit if user isn't root/aARCH='amd64'" build.sh
           sudo ./build.sh
 
-      - name: Build for i686
-        run: |
-          sed -i "s/ARCH='amd64'/ARCH='i686'/g" build.sh
-          sudo ./build.sh
-
       - name: Prepare upload
         run: |
           mkdir -p palen1x
