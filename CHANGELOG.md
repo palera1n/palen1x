@@ -1,10 +1,18 @@
 # Changelog
 
+## 1.0.5
+- Fully switch to an Alpine-based distribution for smaller `.iso` size 
+
+`145~ MB` -> `49~ MB` uncompressed
+
+`88~ MB` -> `25 MB` compressed
+
+- Include `iProxy` bin, so `libimobiledevice` doesn't need to be installed
 ## 1.0.4
 - Added `Switch` option to palera1n_menu, making you able to switch from and to rootless or rootful.
 - Added `Jailbreak Type:` to palera1n_menu
 - Renamed bootstrap script to include rootless in it
-- Added `Serial=3` to options menu.
+- Added `Serial=3` to palera1n_options
 
 ## 1.0.3
 - Seperate bootstrap command for rootless & rootful
