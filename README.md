@@ -11,30 +11,25 @@
     <a href="#building-palen1x">Building palen1x</a> •
     <a href="#contributing">Contributing</a> •
     <a href="#credits">Credits</a> •
-    <a href="https://github.com/palera1n/palen1x/blob/main/CHANGELOG.md">Changelog</a> 
+    <a href="https://github.com/palera1n/palen1x/blob/main/CHANGELOG.md">Changelog</a> • 
+    <a href="https://dsc.gg/palera1n">Support Discord</a> 
 </p>
 
 <p align="center">
     <img src="https://cdn.discordapp.com/attachments/1017854329887129611/1068153144305008730/IMG_0807.png" alt="screenshot" width="950">
 </p>
-<h2
-<p align="center">
-    <a href="https://cdn.nickchan.lol/palera1n/artifacts/palen1x">Download palen1x</a> •
-    <a href="https://dsc.gg/palera1n">Support Discord</a> 
-</p>
-</h2
 
 -------
 # Warning
-[palera1n-c](https://github.com/palera1n/palera1n-c) / palen1x will never work in VirtualBox, VMware or any virtual machine that doesn't support a PCI passthrough. If you recieve a `Segmentation Fault` that's on you.
+[palera1n-c](https://github.com/palera1n/palera1n-c) will never work in VirtualBox, VMware or any virtual machine that doesn't support a PCI passthrough. If you receive a `Segmentation Fault` that's on you.
 
 # Usage
 **Make an [iCloud/iTunes backup](https://support.apple.com/en-us/HT203977) before using palen1x, so that you can go back if something goes wrong**.
 
 The `amd64` iso is for 64-bit CPUs (AMD and Intel) and the `i686` one is for 32-bit CPUs. If you are unsure which one to download, the `amd64` ISO will work in most cases.
 
-1. Download an `.iso` [here](http://mineek.online/palera1n/artifacts/palen1x).
-2. Download [balenaEtcher](https://www.balena.io/etcher/). If you prefer Rufus, make sure to select GPT partition and DD image mode otherwise it won't work.
+1. Download an `.iso` [here](https://cdn.nickchan.lol/palera1n/artifacts/palen1x).
+2. Download [balenaEtcher](https://www.balena.io/etcher/).
 3. Open balenaEtcher and write the `.iso` you downloaded to your USB drive.
 4. Reboot, enter your BIOS's boot menu and select the USB drive.
 
