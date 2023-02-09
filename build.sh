@@ -1,16 +1,14 @@
-#!/bin/sh
-# Made with <3 by flower
-# palen1x build script (a fork of raspberryenvoie/odysseyn1x)
+#!/bin/bash
+#
+# checkn1x build script
+# https://asineth.me/checkn1x
+#
 
 # Exit if user isn't root
 [ "$(id -u)" -ne 0 ] && {
     echo 'Please run as root'
     exit 1
 }
-
-# Change these variables to modify the version of palera1n-c, with updated PongoOS
-PALERA1N_AMD64='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86_64'
-PALERA1N_I686='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86'
 
 GREEN="$(tput setaf 2)"
 BLUE="$(tput setaf 6)"
@@ -38,145 +36,108 @@ until [ "$ARCH" = 'amd64' ] || [ "$ARCH" = 'i686' ]; do
     [ -z "$input_arch" ] && ARCH='amd64'
 done
 
-# Delete old build
-{
-    umount work/chroot/proc
-    umount work/chroot/sys
-    umount work/chroot/dev
-} > /dev/null 2>&1
-rm -rf work/
-
-set -e -u -v
-start_time="$(date -u +%s)"
-
-# Install dependencies to build palen1x
-apt-get update
-apt-get install -y --no-install-recommends wget debootstrap grub-pc-bin \
-    grub-efi-amd64-bin mtools squashfs-tools xorriso ca-certificates curl \
-    libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
-
 if [ "$ARCH" = 'amd64' ]; then
-    REPO_ARCH='amd64' # Debian's 64-bit repos are "amd64"
-    KERNEL_ARCH='amd64' # Debian's 32-bit kernels are suffixed "amd64"
+    ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.1-x86_64.tar.gz' # Debian's 64-bit repos are "amd64"
+    PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86_64'
 else
     # Install depencies to build palen1x for i686
-    dpkg --add-architecture i386
-    apt-get update
-    apt install -y --no-install-recommends libusb-1.0-0-dev:i386 gcc-multilib
-    REPO_ARCH='i386' # Debian's 32-bit repos are "i386"
-    KERNEL_ARCH='686' # Debian's 32-bit kernels are suffixed "-686"
+    ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86/alpine-minirootfs-3.17.1-x86.tar.gz' # Debian's 32-bit repos are "i386"
+    PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86'
 fi
 
-# Configure the base system
-mkdir -p work/chroot work/iso/live work/iso/boot/grub
-debootstrap --variant=minbase --arch="$REPO_ARCH" stable work/chroot 'http://mirror.xtom.com.hk/debian/'
-mount --bind /proc work/chroot/proc
-mount --bind /sys work/chroot/sys
-mount --bind /dev work/chroot/dev
-cp /etc/resolv.conf work/chroot/etc
-cat << EOF | chroot work/chroot /bin/bash
-# Set debian frontend to noninteractive
-export DEBIAN_FRONTEND=noninteractive
+# clean up previous attempts
+umount -v work/rootfs/dev >/dev/null 2>&1
+umount -v work/rootfs/sys >/dev/null 2>&1
+umount -v work/rootfs/proc >/dev/null 2>&1
+rm -rf work
+mkdir -pv work/{rootfs,iso/boot/grub}
+cd work
 
-# Install requiered packages
-echo "deb http://archive.ubuntu.com/ubuntu bionic main universe" >> work/chroot/etc/apt/sources.list
-apt update
-sleep 1
-apt-get install -y --no-install-recommends linux-image-$KERNEL_ARCH live-boot \
-  systemd systemd-sysv usbmuxd openssh-client sshpass whiptail xz-utils
+# fetch rootfs
+curl -sL "$ROOTFS" | tar -xzC rootfs
+mount -vo bind /dev rootfs/dev
+mount -vt sysfs sysfs rootfs/sys
+mount -vt proc proc rootfs/proc
+cp /etc/resolv.conf rootfs/etc
+cat << ! > rootfs/etc/apk/repositories
+http://dl-cdn.alpinelinux.org/alpine/v3.12/main
+http://dl-cdn.alpinelinux.org/alpine/edge/community
+http://dl-cdn.alpinelinux.org/alpine/edge/testing
+!
 
-# Remove apt as it won't be usable anymore
-sleep 1
-apt purge perl -y --allow-remove-essential
-apt purge apt -y --allow-remove-essential
-EOF
-# Change initramfs compression to xz
-sed -i 's/COMPRESS=gzip/COMPRESS=xz/' work/chroot/etc/initramfs-tools/initramfs.conf
-chroot work/chroot update-initramfs -u
-(
-    cd work/chroot
-    # Empty some directories to make the system smaller
-    rm -f etc/mtab \
-        etc/fstab \
-        etc/ssh/ssh_host* \
-        root/.wget-hsts \
-        root/.bash_history
-    rm -rf var/log/* \
-        var/cache/* \
-        var/backups/* \
-        var/lib/apt/* \
-        var/lib/dpkg/* \
-        usr/share/doc/* \
-        usr/share/man/* \
-        usr/share/info/* \
-        usr/share/icons/* \
-        usr/share/locale/* \
-        usr/share/zoneinfo/* \
-        usr/lib/modules/*
-)
+sleep 2
+# rootfs packages & services
+cat << ! | chroot rootfs /usr/bin/env PATH=/usr/bin:/bin:/usr/sbin:/sbin /bin/sh
+apk update
+apk upgrade
+apk add bash alpine-base usbmuxd ncurses udev openssh-client sshpass newt
+apk add --no-scripts linux-lts linux-firmware-none
+rc-update add bootmisc
+rc-update add hwdrivers
+rc-update add udev
+rc-update add udev-trigger
+rc-update add udev-settle
+!
 
-sleep 1
-# Copy scripts
-cp scripts/* work/chroot/usr/bin/
+# kernel modules
+cat << ! > rootfs/etc/mkinitfs/features.d/palen1x.modules
+kernel/drivers/usb/host
+kernel/drivers/hid/usbhid
+kernel/drivers/hid/hid-generic.ko
+kernel/drivers/hid/hid-cherry.ko
+kernel/drivers/hid/hid-apple.ko
+kernel/net/ipv4
+!
+chroot rootfs /usr/bin/env PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+	/sbin/mkinitfs -F "palen1x" -k -t /tmp -q $(ls rootfs/lib/modules)
+rm -rfv rootfs/lib/modules
+mv -v rootfs/tmp/lib/modules rootfs/lib
+find rootfs/lib/modules/* -type f -name "*.ko" | xargs -n1 -P`nproc` -- strip -v --strip-unneeded
+find rootfs/lib/modules/* -type f -name "*.ko" | xargs -n1 -P`nproc` -- xz --x86 -v9eT0
+depmod -b rootfs $(ls rootfs/lib/modules)
 
-(
-    cd work/chroot/usr/local/bin
-        if [ "$ARCH" = 'amd64' ]; then
-        curl -L -o palera1n "$PALERA1N_AMD64"
-    else
-        curl -L -o palera1n "$PALERA1N_I686"
-    fi
-    chmod +x palera1n
-)
+echo 'palen1x' > rootfs/etc/hostname
+echo "PATH=$PATH:$HOME/.local/bin" >> rootfs/root/.bashrc
+echo "export PALEN1X_VERSION='$VERSION'" > rootfs/root/.bashrc
+echo '/usr/bin/palen1x_menu' >> rootfs/root/.bashrc
+echo "Rootful" > rootfs/usr/bin/.jbtype
 
-# Configure autologin
-mkdir -p work/chroot/etc/systemd/system/getty@tty1.service.d
-cat << EOF > work/chroot/etc/systemd/system/getty@tty1.service.d/override.conf
-[Service]
-ExecStart=
-ExecStart=-/sbin/agetty --noissue --autologin root %I
-Type=idle
-EOF
+# unmount fs
+umount -v rootfs/dev
+umount -v rootfs/sys
+umount -v rootfs/proc
 
-# Configure grub
-cat << "EOF" > work/iso/boot/grub/grub.cfg
+# fetch resources
+curl -Lo rootfs/usr/local/bin/palera1n "$PALERA1N"
+
+# copy files
+cp -av ../inittab rootfs/etc
+cp -v ../scripts/* rootfs/usr/bin
+chmod -v 755 rootfs/usr/local/bin/*
+ln -sv sbin/init rootfs/init
+ln -sv ../../etc/terminfo rootfs/usr/share/terminfo # fix ncurses
+
+# boot config
+cp -av rootfs/boot/vmlinuz-lts iso/boot/vmlinuz
+cat << ! > iso/boot/grub/grub.cfg
 insmod all_video
-echo ''
-echo ' _ __   __ _| | ___ _ __ | |_  __'
-echo '| `_ \ / _` | |/ _ \ `_ \| \ \/ /'
-echo '| |_) | (_| | |  __/ | | | |>  < '
-echo '| .__/ \__,_|_|\___|_| |_|_/_/\_\'
-echo '| |                              '
-echo ''
-echo '    Made with <3 by flower, forked from raspberryenvoie/odysseyn1x'
-linux /boot/vmlinuz boot=live quiet
-initrd /boot/initrd.img
+echo 'palen1x $VERSION'
+linux /boot/vmlinuz quiet loglevel=3
+initrd /boot/initramfs.xz
 boot
-EOF
+!
 
-# Change hostname and configure .bashrc & set default jailbreak type (rootful)
-echo 'palen1x' > work/chroot/etc/hostname
-echo "PATH=$PATH:$HOME/.local/bin" >> work/chroot/root/.bashrc
-echo "export PALEN1X_VERSION='$VERSION'" > work/chroot/root/.bashrc
-echo '/usr/bin/palen1x_menu' >> work/chroot/root/.bashrc
-echo "Rootful" > work/chroot/usr/bin/.jbtype
+# initramfs
+pushd rootfs
+rm -rfv tmp/*
+rm -rfv boot/*
+rm -rfv var/cache/*
+rm -fv etc/resolv.conf
+find . | cpio -oH newc | xz -C crc32 --x86 -vz9eT0 > ../iso/boot/initramfs.xz
+popd
 
-rm -f work/chroot/etc/resolv.conf
+# iso creation
+grub-mkrescue -o "c-palen1x-$VERSION-$ARCH.iso" iso --compress=xz
+mv c-palen1x-*.iso ..
 
-# Build the ISO
-umount work/chroot/proc
-umount work/chroot/sys
-umount work/chroot/dev
-cp work/chroot/vmlinuz work/iso/boot
-cp work/chroot/initrd.img work/iso/boot
-mksquashfs work/chroot work/iso/live/filesystem.squashfs -noappend -e boot -comp xz -Xbcj x86
-grub-mkrescue -o "c-palen1x-$VERSION-$ARCH.iso" work/iso \
-    --compress=xz \
-    --fonts='' \
-    --locales='' \
-    --themes=''
 
-end_time="$(date -u +%s)"
-elapsed_time="$((end_time - start_time))"
-
-echo "Built c-palen1x-$VERSION-$ARCH in $((elapsed_time / 60)) minutes and $((elapsed_time % 60)) seconds."

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Load functions and variables
 . /usr/bin/common
 # Display ssh logo

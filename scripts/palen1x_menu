@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 # Load functions and variables
-. /usr/bin/common
-
+#. /usr/bin/common
+PALEN1X_VERSION="1.0.5"
 # export NEWT_COLORS='root=,black border=white,black window=white,black title=white,black textbox=white,black listbox=white,black'
 
 export NEWT_COLORS='root=,black
@@ -43,14 +43,12 @@ while true; do
       break
       ;;
     4)
-      palen1x_logo
       sleep 2
-      /usr/sbin/shutdown now
+      /sbin/poweroff
       ;;
     5)
-      palen1x_logo
       sleep 2
-      /usr/sbin/reboot
+      /sbin/reboot
       ;;
   esac
 done

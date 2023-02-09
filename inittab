@@ -1,0 +1,4 @@
+# /etc/inittab
+::sysinit:/sbin/openrc sysinit
+tty1::respawn:/bin/bash --rcfile /root/.bashrc
+tty2::respawn:/usr/sbin/usbmuxd -f
