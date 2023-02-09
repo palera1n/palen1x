@@ -13,14 +13,16 @@
     <a href="#credits">Credits</a> •
     <a href="https://github.com/palera1n/palen1x/blob/main/CHANGELOG.md">Changelog</a> 
 </p>
-<p align="center">
-    <a href="https://cdn.nickchan.lol/palera1n/artifacts/palen1x">Download</a> •
-    <a href="https://dsc.gg/palera1n">Support</a> 
-</p>
 
 <p align="center">
     <img src="https://cdn.discordapp.com/attachments/1017854329887129611/1068153144305008730/IMG_0807.png" alt="screenshot" width="950">
 </p>
+<h2
+<p align="center">
+    <a href="https://cdn.nickchan.lol/palera1n/artifacts/palen1x">Download palen1x</a> •
+    <a href="https://dsc.gg/palera1n">Support Discord</a> 
+</p>
+</h2
 
 -------
 # Warning
