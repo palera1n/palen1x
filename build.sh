@@ -38,7 +38,7 @@ done
 
 # Install dependencies to build palen1x
 apt-get update
-apt-get install -y --no-install-recommends wget debootstrap mtools xorriso ca-certificates curllibusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
+apt-get install -y --no-install-recommends wget debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
 
 if [ "$ARCH" = 'amd64' ]; then
     ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.1-x86_64.tar.gz' # Debian's 64-bit repos are "amd64"
