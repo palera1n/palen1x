@@ -22,7 +22,7 @@ whiptail_height="$(($(tput lines) - 6))"
 whiptail_width="$(($(tput cols) - 20))"
 
 if [ "$jbtype" = "Rootless" ]; then
-  OPTIONS="$(whiptail --separate-output --nocancel --ok-button "" --title "palera1n options" --checklist \
+  OPTIONS="$(whiptail --separate-output --nocancel --ok-button "Select" --title "palera1n options" --checklist \
   "Press spacebar to select option, and enter to complete" 15 54 5 \
   "1" "Verbose" OFF \
   "2" "Safe Mode" OFF \
@@ -49,7 +49,7 @@ if [ "$jbtype" = "Rootless" ]; then
       echo "Cancelled"
   fi
 elif [ "$jbtype" = "Rootful" ]; then
-  OPTIONS="$(whiptail --separate-output --nocancel --ok-button "" --title "palera1n options" --checklist \
+  OPTIONS="$(whiptail --separate-output --nocancel --ok-button "Select" --title "palera1n options" --checklist \
   "Press spacebar to select option, and enter to complete" 15 54 5 \
   "1" "Create Fakefs" OFF \
   "2" "Verbose" OFF \
