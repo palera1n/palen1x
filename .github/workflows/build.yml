@@ -26,7 +26,7 @@ jobs:
       - name: Prepare upload
         run: |
           mkdir -p palen1x
-          for i in *.iso; do mv $i palen1x; done
+          for i in work/*.iso; do mv $i palen1x; done
 
       - name: Upload artifact
         uses: wangyucode/sftp-upload-action@v1.4.8
