@@ -83,10 +83,11 @@ echo "deb http://archive.ubuntu.com/ubuntu bionic main universe" >> work/chroot/
 apt update
 sleep 1
 apt-get install -y --no-install-recommends linux-image-$KERNEL_ARCH live-boot \
-  systemd systemd-sysv usbmuxd openssh-client sshpass whiptail
+  systemd systemd-sysv usbmuxd openssh-client sshpass whiptail xz-utils
 
 # Remove apt as it won't be usable anymore
 sleep 1
+apt purge perl -y --allow-remove-essential
 apt purge apt -y --allow-remove-essential
 EOF
 # Change initramfs compression to xz
