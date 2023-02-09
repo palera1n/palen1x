@@ -39,3 +39,24 @@ jobs:
           dryRun: false
           localDir: 'palen1x/'
           remoteDir: '/palera1n/artifacts/palen1x'
+
+      - name: Build for i686
+        run: |
+          sed -i "s/ARCH='amd64'/ARCH='i686'/g" build.sh
+          sudo ./build.sh
+
+      - name: Prepare upload
+        run: |
+          for i in work/*.iso; do sudo mv $i palen1x; done
+          
+      - name: Upload artifact
+        uses: wangyucode/sftp-upload-action@v1.4.8
+        with:
+          host: ${{ secrets.NICKCHAN_FTP_HOST }}
+          port: ${{ secrets.NICKCHAN_FTP_PORT }}
+          username: palera1n
+          privateKey: ${{ secrets.NICKCHAN_FTP_KEY }}
+          forceUpload: true
+          dryRun: false
+          localDir: 'palen1x/'
+          remoteDir: '/palera1n/artifacts/palen1x'
