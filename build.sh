@@ -142,5 +142,4 @@ popd
 
 # iso creation
 grub-mkrescue -o "c-palen1x-$VERSION-$ARCH.iso" iso --compress=xz
-chmod 0777 *.iso
 
