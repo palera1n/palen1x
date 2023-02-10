@@ -6,12 +6,6 @@ args=$(echo $arg)
 jbt=$(cat /usr/bin/.jbtype)
 jbtype=$(echo $jbt)
 
-# ideviceinfo
-ProductType=$(ideviceinfo -k ProductType)
-CPUArchitecture=$(ideviceinfo -k CPUArchitecture)
-ProductVersion=$(ideviceinfo -k ProductVersion)
-BuildVersion=$(ideviceinfo -k BuildVersion)
-
 export NEWT_COLORS='root=,black
 border=white,black
 title=white,black
@@ -46,10 +40,6 @@ while true; do
       echo ''
       /usr/local/bin/palera1n $args
       sleep 2
-      echo ''
-      echo '#========================'
-      echo "# - Debug Info: ${GREEN}$ProductType${NORMAL} (${GREEN}$CPUArchitecture${NORMAL}) | ${GREEN}$ProductVersion${NORMAL} (${GREEN}$BuildVersion${NORMAL})"
-      echo '#========================'
       echo ''
       enter_to_quit
       /usr/bin/palera1n_menu
