@@ -43,16 +43,6 @@ while true; do
   case "$CHOICE" in
     1)
       clear
-      echo '#'
-      echo '# palera1n-c 2.0.0'
-      echo '#'
-      echo '#======== Made by ======='
-      echo '# Made with <3 by Nebula, Mineek, Nathan, llsc12, Ploosh,'
-      echo '# Nick Chan, and the amazing developers of checkra1n!'
-      echo '#=== Troubleshooting ===='
-      echo '# - If you encounter lockdownd errors make sure to unlock your device and replug.'
-      echo "# - Debug Info: ${GREEN}$ProductType${NORMAL} (${GREEN}$CPUArchitecture${NORMAL}) | ${GREEN}$ProductVersion${NORMAL} (${GREEN}$BuildVersion${NORMAL})"
-      echo '#========================'
       echo ''
       /usr/local/bin/palera1n $args
       sleep 2
