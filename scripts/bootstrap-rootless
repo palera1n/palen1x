@@ -9,10 +9,15 @@ The keyboard layout is in American Qwerty.
 Your iDevice's default password is alpine.
 Press Ctrl + C to quit.
 
+Enter 'Ready.' in prompt to start bootstrapping.
 EOF
-IPROXY=$(iproxy 28605 44 >/dev/null 2>&1 & echo $!)
+
+prompt 'Ready?: ' input
 # Execute script
+if [ "$input" = "Ready." ]; then
+      scp -o "ProxyCommand=inetcat 44" -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /bin/deploy-rootless.sh root@127.0.0.1:/private/var/root 
 
-scp -P28605 -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /bin/deploy-rootless.sh root@127.0.0.1:/private/var/root 
-
-ssh root@127.0.0.1 -p28605 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /var/root && ./deploy-rootless.sh"
+      ssh -o "ProxyCommand=inetcat 44" root@127.0.0.1 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /var/root && ./deploy-rootless.sh"
+else 
+      echo "Invalid Prompt."
+fi

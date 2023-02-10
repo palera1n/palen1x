@@ -42,7 +42,6 @@ if [ "$jbtype" = "Rootless" ]; then
               "6") output6="-v";;
           esac
       done
-# this is the output of selected options, want them to be in palera1n_menu
       echo "$output1 $output2 $output3 $output4 $output5 $output6" > /usr/bin/.args
       /usr/bin/palera1n_menu
   else
@@ -71,7 +70,6 @@ elif [ "$jbtype" = "Rootful" ]; then
               "7") output7="-v";;
           esac
       done
-# this is the output of selected options, want them to be in palera1n_menu
       echo "$output1 $output2 $output3 $output4 $output5 $output6 $output7" > /usr/bin/.args
       /usr/bin/palera1n_menu
   else

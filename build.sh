@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# checkn1x build script
-# https://asineth.me/checkn1x
-#
+# palen1x build script
+# Made with <3 https://github.com/palera1n/palen1x
+# Modified from https://github.com/asineth0/checkn1x & https://github.com/raspberryenvoie/odysseyn1x :3
 
 # Exit if user isn't root
 [ "$(id -u)" -ne 0 ] && {
@@ -14,11 +14,17 @@ GREEN="$(tput setaf 2)"
 BLUE="$(tput setaf 6)"
 NORMAL="$(tput sgr0)"
 cat << EOF
-${GREEN}############################################${NORMAL}
-${GREEN}#                                          #${NORMAL}
-${GREEN}#  ${BLUE}Welcome to the palen1x build script     ${GREEN}#${NORMAL}
-${GREEN}#                                          #${NORMAL}
-${GREEN}############################################${NORMAL}
+
+           Welcome to                 ${GREEN}&&&%##%%(${NORMAL}         
+                               ${GREEN}&&&&&&&&&&&%#&&%%%${NORMAL}       
+                        ${GREEN}&&&&&&&&&&&&&&&&&&%%#&&&%%%${NORMAL}     
+                ${GREEN}&&&&&&&&${NORMAL}#############${GREEN}&&&%%&%%&&&&%%%${NORMAL}    
+         ${GREEN}%%%%%%%%%%%%&&&${NORMAL}#  ${GREEN}palen1x${NORMAL}  #${GREEN}%&&&&%%%%%%%%%%%%${NORMAL}  
+     ${GREEN}#######((((###%%%%%${NORMAL}#############${GREEN}&%%%%%%%${NORMAL}           
+     ${GREEN}######/     ########%%%%&&&&&&&%%${NORMAL}                  
+      ${GREEN}((((((((((((######%%%%%%%${NORMAL}                         
+       ${GREEN}(((((((((#####%%*${NORMAL}                                
+        ${GREEN}/(((((##${NORMAL}                  build script     
 
 EOF
 # Ask for the version and architecture if variables are empty
@@ -40,16 +46,16 @@ done
 apt-get update
 apt-get install -y --no-install-recommends wget debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
 
+# Get proper files for amd64 or i686
 if [ "$ARCH" = 'amd64' ]; then
     ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.1-x86_64.tar.gz' # Debian's 64-bit repos are "amd64"
     PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86_64'
 else
-    # Install depencies to build palen1x for i686
     ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86/alpine-minirootfs-3.17.1-x86.tar.gz' # Debian's 32-bit repos are "i386"
     PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86'
 fi
 
-# clean up previous attempts
+# Clean up previous attempts
 umount -v work/rootfs/dev >/dev/null 2>&1
 umount -v work/rootfs/sys >/dev/null 2>&1
 umount -v work/rootfs/proc >/dev/null 2>&1
@@ -57,7 +63,7 @@ rm -rf work
 mkdir -pv work/{rootfs,iso/boot/grub}
 cd work
 
-# fetch rootfs
+# Fetch ROOTFS
 curl -sL "$ROOTFS" | tar -xzC rootfs
 mount -vo bind /dev rootfs/dev
 mount -vt sysfs sysfs rootfs/sys
@@ -70,7 +76,7 @@ http://dl-cdn.alpinelinux.org/alpine/edge/testing
 !
 
 sleep 2
-# rootfs packages & services
+# ROOTFS packages & services
 cat << ! | chroot rootfs /usr/bin/env PATH=/usr/bin:/bin:/usr/sbin:/sbin /bin/sh
 apk update
 apk upgrade
@@ -100,28 +106,29 @@ find rootfs/lib/modules/* -type f -name "*.ko" | xargs -n1 -P`nproc` -- strip -v
 find rootfs/lib/modules/* -type f -name "*.ko" | xargs -n1 -P`nproc` -- xz --x86 -v9eT0
 depmod -b rootfs $(ls rootfs/lib/modules)
 
+# Echo TUI configurations
 echo 'palen1x' > rootfs/etc/hostname
 echo "PATH=$PATH:$HOME/.local/bin" >> rootfs/root/.bashrc
 echo "export PALEN1X_VERSION='$VERSION'" > rootfs/root/.bashrc
 echo '/usr/bin/palen1x_menu' >> rootfs/root/.bashrc
 echo "Rootful" > rootfs/usr/bin/.jbtype
 
-# unmount fs
+# Unmount fs
 umount -v rootfs/dev
 umount -v rootfs/sys
 umount -v rootfs/proc
 
-# fetch resources
+# Fetch palera1n-c
 curl -Lo rootfs/usr/local/bin/palera1n "$PALERA1N"
 
-# copy files
+# Copy files
 cp -av ../inittab rootfs/etc
 cp -v ../scripts/* rootfs/usr/bin
 chmod -v 755 rootfs/usr/local/bin/*
 ln -sv sbin/init rootfs/init
 ln -sv ../../etc/terminfo rootfs/usr/share/terminfo # fix ncurses
 
-# boot config
+# Boot config
 cp -av rootfs/boot/vmlinuz-lts iso/boot/vmlinuz
 cat << ! > iso/boot/grub/grub.cfg
 insmod all_video
@@ -140,6 +147,6 @@ rm -fv etc/resolv.conf
 find . | cpio -oH newc | xz -C crc32 --x86 -vz9eT0 > ../iso/boot/initramfs.xz
 popd
 
-# iso creation
+# ISO creation
 grub-mkrescue -o "c-palen1x-$VERSION-$ARCH.iso" iso --compress=xz
 

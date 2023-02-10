@@ -9,16 +9,16 @@ Connect your iDevice to this computer
 
 The keyboard layout is in American Qwerty.
 Your iDevice's default password is alpine.
+Your iDevice's users are `root` and `mobile`.
+Your iDevice's default port is 22.
 
 EOF
 prompt 'User: ' user
 prompt 'Port: ' port
 
-IPROXY=$(iproxy 28605 "$port" >/dev/null 2>&1 & echo $!)
-
 clear
 
 blue_echo 'SSHing into your iDevice...'
-ssh -qp28605 -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" "$user"@127.0.0.1 || \
+ssh -o "ProxyCommand=inetcat $port" -o "UserKnownHostsFile=/dev/null" $user@iPhone || \
     failed_echo 'Failed to SSH into your iDevice.'
 enter_to_quit
