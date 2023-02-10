@@ -14,7 +14,7 @@ GREEN="$(tput setaf 2)"
 BLUE="$(tput setaf 6)"
 NORMAL="$(tput sgr0)"
 cat << EOF
-
+              
            Welcome to                 ${GREEN}&&&%##%%(${NORMAL}         
                                ${GREEN}&&&&&&&&&&&%#&&%%%${NORMAL}       
                         ${GREEN}&&&&&&&&&&&&&&&&&&%%#&&&%%%${NORMAL}     
@@ -25,7 +25,7 @@ cat << EOF
       ${GREEN}((((((((((((######%%%%%%%${NORMAL}                         
        ${GREEN}(((((((((#####%%*${NORMAL}                                
         ${GREEN}/(((((##${NORMAL}                  build script     
-
+              
 EOF
 # Ask for the version and architecture if variables are empty
 while [ -z "$VERSION" ]; do
