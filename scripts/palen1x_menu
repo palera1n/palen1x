@@ -39,7 +39,7 @@ while true; do
       ;;
     3)
       clear
-      break
+      /bin/bash -i && exit
       ;;
     4)
       palen1x_logo
