@@ -18,13 +18,13 @@ cat << EOF
            Welcome to                 ${GREEN}&&&%##%%(${NORMAL}         
                                ${GREEN}&&&&&&&&&&&%#&&%%%${NORMAL}       
                         ${GREEN}&&&&&&&&&&&&&&&&&&%%#&&&%%%${NORMAL}     
-                ${GREEN}&&&&&&&&${NORMAL}#############${GREEN}&&&%%&%%&&&&%%%${NORMAL}    
-         ${GREEN}%%%%%%%%%%%%&&&${NORMAL}#  ${GREEN}palen1x${NORMAL}  #${GREEN}%&&&&%%%%%%%%%%%%${NORMAL}  
-     ${GREEN}#######((((###%%%%%${NORMAL}#############${GREEN}&%%%%%%%${NORMAL}           
-     ${GREEN}######/     ########%%%%&&&&&&&%%${NORMAL}                  
-      ${GREEN}((((((((((((######%%%%%%%${NORMAL}                         
-       ${GREEN}(((((((((#####%%*${NORMAL}                                
-        ${GREEN}/(((((##${NORMAL}                  build script     
+                ${BLUE}&&&&&&&&${NORMAL}#############${GREEN}&&&%%&%%&&&&%%%${NORMAL}    
+         ${BLUE}%%%%%%%%%%%%&&&${NORMAL}#  ${BLUE}palen1x${NORMAL}  #${GREEN}%&&&&%%%%%%%%%%%%${NORMAL}  
+     ${BLUE}#######((((###%%%%%${NORMAL}#############${GREEN}&%%%%%%%${NORMAL}           
+     ${BLUE}######/     ########%%%%&&&&&&&%%${NORMAL}                  
+      ${BLUE}((((((((((((######%%%%%%%${NORMAL}                         
+       ${BLUE}(((((((((#####%%*${NORMAL}                                
+        ${BLUE}/(((((##${NORMAL}                  build script     
               
 EOF
 # Ask for the version and architecture if variables are empty
