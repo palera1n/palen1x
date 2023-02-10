@@ -5,7 +5,7 @@
 
 `145~ MB` -> `49~ MB` uncompressed
 
-`88~ MB` -> `25 MB` compressed
+`88~ MB` -> `26 MB` compressed
 
 - Include ~~`iProxy`~~ `inetcat` bin, so `libimobiledevice` doesn't need to be installed
 - Fixed `*_logos` not being identified in scripts

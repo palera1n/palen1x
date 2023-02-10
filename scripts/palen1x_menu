@@ -38,6 +38,7 @@ while true; do
       /usr/bin/ssh_into_ios
       ;;
     3)
+      /usr/bin/palen1x_menu
       clear
       /bin/bash -i && exit
       ;;
