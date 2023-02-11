@@ -28,8 +28,8 @@ if [ "$jbtype" = "Rootless" ]; then
 while true; do
   CHOICE="$(whiptail --nocancel --title "palera1n | use arrow keys" --menu \
     "
-  Jailbreak Type: ${GREEN}$jbtype${NORMAL}
-  Arguments: ${GREEN}$args${NORMAL}" $whiptail_height $whiptail_width 8 \
+  Jailbreak Type: $jbtype
+  Arguments: $args" $whiptail_height $whiptail_width 8 \
     '1' 'Start' \
     '2' 'Options' \
     '3' 'Switch' \
@@ -62,8 +62,8 @@ elif [ "$jbtype" = "Rootful" ]; then
 while true; do
   CHOICE="$(whiptail --nocancel --title "palera1n | use arrow keys" --menu \
     "
-  Jailbreak Type: ${GREEN}$jbtype${NORMAL}
-  Arguments: -f ${GREEN}$args${NORMAL}" $whiptail_height $whiptail_width 8 \
+  Jailbreak Type: $jbtype
+  Arguments: -f $args}" $whiptail_height $whiptail_width 8 \
     '1' 'Start' \
     '2' 'Options' \
     '3' 'Switch' \
@@ -84,8 +84,8 @@ while true; do
       /usr/local/bin/palera1n -f $args
       sleep 2
       echo ''
-      echo " [*] Chosen Jailbreak Type: ${GREEN}$jbtype${NORMAL}"
-      echo " [*] Chosen Flags: ${GREEN}$args${NORMAL}"
+      echo -e " [*] Chosen Jailbreak Type: ${GREEN}$jbtype${NORMAL}"
+      echo -e " [*] Chosen Flags: ${GREEN}$args${NORMAL}"
       echo ''
       enter_to_quit
       /usr/bin/palera1n_menu
