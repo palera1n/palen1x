@@ -28,8 +28,8 @@ if [ "$jbtype" = "Rootless" ]; then
 while true; do
   CHOICE="$(whiptail --nocancel --title "palera1n | use arrow keys" --menu \
     "
-  Jailbreak Type: $jbtype
-  Arguments: $args" $whiptail_height $whiptail_width 8 \
+  Jailbreak Type: ${GREEN}$jbtype${NORMAL}
+  Arguments: ${GREEN}$args${NORMAL}" $whiptail_height $whiptail_width 8 \
     '1' 'Start' \
     '2' 'Options' \
     '3' 'Switch' \
@@ -62,8 +62,8 @@ elif [ "$jbtype" = "Rootful" ]; then
 while true; do
   CHOICE="$(whiptail --nocancel --title "palera1n | use arrow keys" --menu \
     "
-  Jailbreak Type: $jbtype
-  Arguments: -f $args" $whiptail_height $whiptail_width 8 \
+  Jailbreak Type: ${GREEN}$jbtype${NORMAL}
+  Arguments: -f ${GREEN}$args${NORMAL}" $whiptail_height $whiptail_width 8 \
     '1' 'Start' \
     '2' 'Options' \
     '3' 'Switch' \
@@ -71,31 +71,24 @@ while true; do
   case "$CHOICE" in
     1)
       clear
-      ProductType=$(ideviceinfo -k ProductType)
-      CPUArchitecture=$(ideviceinfo -k CPUArchitecture > /dev/null)
-      ProductVersion=$(ideviceinfo -k ProductVersion > /dev/null)
-      BuildVersion=$(ideviceinfo -k BuildVersion > /dev/null)
-      echo '#'
-      echo '# palera1n-c 2.0.0'
-      echo '#'
-      echo '#======== Made by ======='
-      echo '# Made with <3 by Nebula, Mineek, Nathan, llsc12, Ploosh,'
-      echo '# Nick Chan, and the amazing developers of checkra1n!'
-      echo '#=== Troubleshooting ===='
-      echo '# - If you encounter lockdownd errors make sure to'
-      echo '# unlock your device and replug.'
-      echo "# - Debug Info: ${GREEN}$ProductType${NORMAL} (${GREEN}$CPUArchitecture${NORMAL}) | ${GREEN}$ProductVersion${NORMAL} (${GREEN}$BuildVersion${NORMAL})"
-      echo '#========================'
+      echo ''
+      echo ' palera1n-c 2.0.0'
+      echo ' Made with <3 by Nebula, Mineek, Nathan, llsc12, Ploosh,'
+      echo ' Nick Chan, and the amazing developers of checkra1n!'
+      echo ''
+      echo ' [!] If you encounter lockdownd errors make sure to'
+      echo ' unlock your device and replug.'
+      echo ' [!] arm64e is not supported!'
+      echo ''
       echo ''
       /usr/local/bin/palera1n -f $args
       sleep 2
-      echo '#========================'
-      echo "# - Debug Info: ${GREEN}$ProductType${NORMAL} (${GREEN}$CPUArchitecture${NORMAL}) | ${GREEN}$ProductVersion${NORMAL} (${GREEN}$BuildVersion${NORMAL})"
-      echo '#========================'
+      echo ''
+      echo " [*] Chosen Jailbreak Type: ${GREEN}$jbtype${NORMAL}"
+      echo " [*] Chosen Flags: ${GREEN}$args${NORMAL}"
       echo ''
       enter_to_quit
       /usr/bin/palera1n_menu
-      echo "Do 'exit' after you're done."
       ;;
     2)
       clear
