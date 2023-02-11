@@ -35,7 +35,6 @@ fi
 cd /var/root
 curl -sLOOOOO https://apt.procurs.us/bootstraps/$(value)/bootstrap-ssh-iphoneos-arm64.tar.zst
 curl -sLOOOOO https://raw.githubusercontent.com/elihwyma/Pogo/1724d2864ca55bc598fa96bee62acad875fe5990/Pogo/Required/org.coolstar.sileonightly_2.4_iphoneos-arm64.deb
-curl -sLOOOOO https://cdn.discordapp.com/attachments/1028398976640229380/1068982161568440340/preferenceloader_2.2.6-7debug_iphoneos-arm64.deb
 zstd -d bootstrap-ssh-iphoneos-arm64.tar.zst
 sleep 2
 
@@ -56,7 +55,6 @@ sleep 1
 # Install packages
 echo "Installing Sileo-Nightly and upgrading Procursus packages..."
 dpkg -i org.coolstar.sileonightly_2.4_iphoneos-arm64.deb > /dev/null
-dpkg -i preferenceloader_2.2.6-7debug_iphoneos-arm64.deb > /dev/null
 uicache -p /var/jb/Applications/Sileo-Nightly.app
 
 # Echo palera1n repo to procursus sources, update sources, & remove leftovers
@@ -72,7 +70,6 @@ apt-get update -o Acquire::AllowInsecureRepositories=true
 apt-get dist-upgrade -y --allow-downgrades --allow-unauthenticated
 
 rm org.coolstar.sileonightly_2.4_iphoneos-arm64.deb
-rm preferenceloader_2.2.6-7debug_iphoneos-arm64.deb
 rm bootstrap-ssh-iphoneos-arm64.tar
 rm bootstrap-ssh-iphoneos-arm64.tar.zst
 

@@ -1,0 +1,24 @@
+#!/bin/bash
+# Load functions and variables
+. /usr/bin/common
+
+cat << "EOF"
+This bootstraps your device with Palecursus 1800/1900
+
+The keyboard layout is in American Qwerty.
+Your iDevice's default password is alpine.
+Press Ctrl + C to quit.
+
+Enter 'Ready.' in prompt to start bootstrapping.
+EOF
+
+prompt 'Ready?: ' input
+# Execute script
+if [ "$input" = "Ready." ]; then
+      scp -o "ProxyCommand=inetcat 44" -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /bin/deploy-rootful.sh root@127.0.0.1:/private/var/tmp
+
+      ssh -o "ProxyCommand=inetcat 44" root@127.0.0.1 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /private/var/tmp && ./deploy-rootful.sh"
+else
+      echo "Invalid Prompt."
+fi
+
