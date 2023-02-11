@@ -76,9 +76,9 @@ while true; do
       echo ' Made with <3 by Nebula, Mineek, Nathan, llsc12, Ploosh,'
       echo ' Nick Chan, and the amazing developers of checkra1n!'
       echo ''
-      echo ' [!] If you encounter lockdownd errors make sure to'
-      echo ' unlock your device and replug.'
-      echo ' [!] arm64e is not supported!'
+      echo " ${YELLOW}[!] If you encounter lockdownd errors make sure to${NORMAL}"
+      echo " ${YELLOW}unlock your device and replug.${NORMAL}"
+      echo " ${YELLOW}[!] arm64e is not supported!${NORMAL}"
       echo ''
       echo ''
       /usr/local/bin/palera1n -f $args
