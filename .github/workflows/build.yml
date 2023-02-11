@@ -23,15 +23,6 @@ jobs:
           mkdir -p palen1x
           for i in work/*.iso; do sudo mv $i palen1x; done
 
-      - name: Build for aarch64 (arm64)
-        run: |
-          sed -i "s/ARCH='amd64'/ARCH='aarch64'/g" build.sh
-          sudo ./build.sh
-
-      - name: Prepare upload
-        run: |
-          for i in work/*.iso; do sudo mv $i palen1x; done
-          
       - name: Build for i686
         run: |
           sed -i "s/ARCH='aarch64'/ARCH='i686'/g" build.sh

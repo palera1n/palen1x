@@ -32,15 +32,13 @@ while [ -z "$VERSION" ]; do
     printf 'Version: '
     read -r VERSION
 done
-until [ "$ARCH" = 'amd64' ] || [ "$ARCH" = 'i686' ] || [ "$ARCH" = 'aarch64' ]; do
+until [ "$ARCH" = 'amd64' ] || [ "$ARCH" = 'i686' ]; do
     echo '1 amd64'
     echo '2 i686'
-    echo '3 aarch64'
     printf 'Which architecture? amd64 (default), i686, or aarch64 '
     read -r input_arch
     [ "$input_arch" = 1 ] && ARCH='amd64'
     [ "$input_arch" = 2 ] && ARCH='i686'
-    [ "$input_arch" = 3 ] && ARCH='aarch64'
     [ -z "$input_arch" ] && ARCH='amd64'
 done
 
@@ -52,9 +50,6 @@ apt-get install -y --no-install-recommends wget debootstrap mtools xorriso ca-ce
 if [ "$ARCH" = 'amd64' ]; then
     ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.1-x86_64.tar.gz'
     PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86_64'
-elif [ "$ARCH" = 'aarch64' ]; then
-    ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/aarch64/alpine-minirootfs-3.17.2-aarch64.tar.gz'
-    PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-arm64'
 else
     ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86/alpine-minirootfs-3.17.1-x86.tar.gz'
     PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86'
