@@ -2,6 +2,7 @@
 # Load functions and variables
 . /usr/bin/common
 
+rm /root/.ssh/known_hosts
 cat << "EOF"
 This bootstraps your device with Procursus 1800/1900
 
@@ -15,7 +16,7 @@ EOF
 prompt 'Ready?: ' input
 # Execute script
 if [ "$input" = "Ready." ]; then
-      scp -o "ProxyCommand=inetcat 44" -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /bin/deploy-rootless.sh root@127.0.0.1:/private/var/root 
+      scp -o "ProxyCommand=inetcat 44" -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /usr/bin/deploy-rootless.sh root@127.0.0.1:/private/var/root 
 
       ssh -o "ProxyCommand=inetcat 44" root@127.0.0.1 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /var/root && ./deploy-rootless.sh"
 else 
