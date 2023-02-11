@@ -72,9 +72,9 @@ while true; do
     1)
       clear
       ProductType=$(ideviceinfo -k ProductType)
-      CPUArchitecture=$(ideviceinfo -k CPUArchitecture)
-      ProductVersion=$(ideviceinfo -k ProductVersion)
-      BuildVersion=$(ideviceinfo -k BuildVersion)
+      CPUArchitecture=$(ideviceinfo -k CPUArchitecture > /dev/null)
+      ProductVersion=$(ideviceinfo -k ProductVersion > /dev/null)
+      BuildVersion=$(ideviceinfo -k BuildVersion > /dev/null)
       echo '#'
       echo '# palera1n-c 2.0.0'
       echo '#'
