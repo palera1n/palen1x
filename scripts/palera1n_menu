@@ -70,9 +70,26 @@ while true; do
     '4' 'Exit' 3>&1 1>&2 2>&3)"
   case "$CHOICE" in
     1)
-      clear
+      ProductType=$(ideviceinfo -k ProductType)
+      CPUArchitecture=$(ideviceinfo -k CPUArchitecture)
+      ProductVersion=$(ideviceinfo -k ProductVersion)
+      BuildVersion=$(ideviceinfo -k BuildVersion)
+      echo '#'
+      echo '# palera1n-c 2.0.0'
+      echo '#'
+      echo '#======== Made by ======='
+      echo '# Made with <3 by Nebula, Mineek, Nathan, llsc12, Ploosh,'
+      echo '# Nick Chan, and the amazing developers of checkra1n!'
+      echo '#=== Troubleshooting ===='
+      echo '# - If you encounter lockdownd errors make sure to unlock your device and replug.'
+      echo "# - Debug Info: ${GREEN}$ProductType${NORMAL} (${GREEN}$CPUArchitecture${NORMAL}) | ${GREEN}$ProductVersion${NORMAL} (${GREEN}$BuildVersion${NORMAL})"
+      echo '#========================'
+      echo ''
       /usr/local/bin/palera1n -f $args
       sleep 2
+      echo '#========================'
+      echo "# - Debug Info: ${GREEN}$ProductType${NORMAL} (${GREEN}$CPUArchitecture${NORMAL}) | ${GREEN}$ProductVersion${NORMAL} (${GREEN}$BuildVersion${NORMAL})"
+      echo '#========================'
       echo ''
       enter_to_quit
       /usr/bin/palera1n_menu
