@@ -25,7 +25,12 @@ jobs:
 
       - name: Build for i686
         run: |
-          sed -i "s/ARCH='amd64'/ARCH='i686'/g" build.sh
+          sed -i "s/ARCH='amd64'/ARCH='aarch64'/g" build.sh
+          sudo ./build.sh
+
+      - name: Build for i686
+        run: |
+          sed -i "s/ARCH='aarch64'/ARCH='i686'/g" build.sh
           sudo ./build.sh
 
       - name: Prepare upload
