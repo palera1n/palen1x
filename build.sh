@@ -48,10 +48,10 @@ apt-get install -y --no-install-recommends wget debootstrap mtools xorriso ca-ce
 
 # Get proper files for amd64 or i686
 if [ "$ARCH" = 'amd64' ]; then
-    ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.1-x86_64.tar.gz' # Debian's 64-bit repos are "amd64"
+    ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.1-x86_64.tar.gz'
     PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86_64'
 else
-    ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86/alpine-minirootfs-3.17.1-x86.tar.gz' # Debian's 32-bit repos are "i386"
+    ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86/alpine-minirootfs-3.17.1-x86.tar.gz'
     PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86'
 fi
 
@@ -112,6 +112,7 @@ echo "PATH=$PATH:$HOME/.local/bin" >> rootfs/root/.bashrc
 echo "export PALEN1X_VERSION='$VERSION'" > rootfs/root/.bashrc
 echo '/usr/bin/palen1x_menu' >> rootfs/root/.bashrc
 echo "Rootful" > rootfs/usr/bin/.jbtype
+echo "" > rootfs/usr/bin/.args
 
 # Unmount fs
 umount -v rootfs/dev
