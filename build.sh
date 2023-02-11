@@ -32,7 +32,7 @@ while [ -z "$VERSION" ]; do
     printf 'Version: '
     read -r VERSION
 done
-until [ "$ARCH" = 'amd64' ] || [ "$ARCH" = 'i686' ]; do
+until [ "$ARCH" = 'amd64' ] || [ "$ARCH" = 'i686' ] || [ "$ARCH" = 'aarch64' ]; do
     echo '1 amd64'
     echo '2 i686'
     echo '3 aarch64'
