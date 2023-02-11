@@ -38,19 +38,17 @@ while true; do
     1)
       clear
       echo ''
-      echo " ${GREEN}palera1n-c 2.0.0${NORMAL}"
-      echo " Made with ${RED}<3${NORMAL} by Nebula, Mineek, Nathan, llsc12, Ploosh,"
-      echo ' Nick Chan, and the amazing developers of checkra1n!'
-      echo ''
-      echo " ${YELLOW}[!] If you encounter lockdownd errors make sure to${NORMAL}"
-      echo " ${YELLOW}unlock your device and replug.${NORMAL}"
-      echo " ${YELLOW}[!] arm64e is not supported!${NORMAL}"
+      echo "# == INFORMATION =="
+      echo "# ${YELLOW}- If you encounter lockdownd errors make sure to${NORMAL}"
+      echo "# ${YELLOW}unlock your device and replug.${NORMAL}"
+      echo "# ${YELLOW}- arm64e is not supported!${NORMAL}"
       echo ''
       /usr/local/bin/palera1n $args
       sleep 2
       echo ''
-      echo " [*] Chosen Jailbreak Type: ${GREEN}$jbtype${NORMAL}"
-      echo " [*] Chosen Flags: ${GREEN}$args${NORMAL}"
+      echo "# == DEBUG =="
+      echo "# Chosen Jailbreak Type: ${BLUE}$jbtype${NORMAL}"
+      echo "# Chosen Flags: ${BLUE}$args${NORMAL}"
       echo ''
       enter_to_quit
       /usr/bin/palera1n_menu
@@ -83,19 +81,17 @@ while true; do
     1)
       clear
       echo ''
-      echo " ${GREEN}palera1n-c 2.0.0${NORMAL}"
-      echo " Made with ${RED}<3${NORMAL} by Nebula, Mineek, Nathan, llsc12, Ploosh,"
-      echo ' Nick Chan, and the amazing developers of checkra1n!'
-      echo ''
-      echo " ${YELLOW}[!] If you encounter lockdownd errors make sure to${NORMAL}"
-      echo " ${YELLOW}unlock your device and replug.${NORMAL}"
-      echo " ${YELLOW}[!] arm64e is not supported!${NORMAL}"
+      echo "# == INFORMATION =="
+      echo "# ${YELLOW}- If you encounter lockdownd errors make sure to${NORMAL}"
+      echo "# ${YELLOW}unlock your device and replug.${NORMAL}"
+      echo "# ${YELLOW}- arm64e is not supported!${NORMAL}"
       echo ''
       /usr/local/bin/palera1n -f $args
       sleep 2
       echo ''
-      echo " [*] Chosen Jailbreak Type: ${GREEN}$jbtype${NORMAL}"
-      echo " [*] Chosen Flags: ${GREEN}$args${NORMAL}"
+      echo "# == DEBUG =="
+      echo "# Chosen Jailbreak Type: ${BLUE}$jbtype${NORMAL}"
+      echo "# Chosen Flags: ${BLUE}$args${NORMAL}"
       echo ''
       enter_to_quit
       /usr/bin/palera1n_menu
