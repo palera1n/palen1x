@@ -93,15 +93,6 @@ while true; do
       echo "# Chosen Flags: ${BLUE}$args${NORMAL}"
       /usr/local/bin/palera1n -f $args
       sleep 2
-        if (( $args[(i)-c] )); then
-          echo "# ==== FAKEFS ====="
-          echo "# You have chosen to create fakeFS, this"
-          echo "# will take up to ${RED}10${NORMAL} minutes!"
-          echo "#"
-          echo "# Once done your device should reboot into the"
-          echo "# un-jailbroken state, and you would need to run"
-          echo "# without ${BLUE}-c${NORMAL}"
-        fi
       echo ''
       echo "# == DEBUG =="
       echo "# Chosen Jailbreak Type: ${BLUE}$jbtype${NORMAL}"
