@@ -21,7 +21,7 @@
 
 -------
 # Warnings
-- I am NOT responsible for any data loss. The user of this distro accepts responsibility should something happen to their device. While nothing should happen, jailbreaking has risks in itself. If your device is stuck in recovery, please run `palera1n -n` in `Shell`.
+- We are NOT responsible for any data loss. The user of this distro accepts responsibility should something happen to their device. While nothing should happen, jailbreaking has risks in itself. If your device is stuck in recovery, please run `palera1n -n` in `Shell`.
 
 - [palera1n-c](https://github.com/palera1n/palera1n-c) will never work in VirtualBox, VMware or any virtual machine that doesn't support a PCI passthrough. If you receive a `Segmentation Fault` that's on you.
 
