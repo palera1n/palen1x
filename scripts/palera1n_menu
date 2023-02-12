@@ -101,7 +101,6 @@ while true; do
           echo "# Once done your device should reboot into the"
           echo "# un-jailbroken state, and you would need to run"
           echo "# without ${BLUE}-c${NORMAL}"
-        else
         fi
       echo ''
       echo "# == DEBUG =="
