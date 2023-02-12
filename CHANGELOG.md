@@ -11,6 +11,7 @@
 - Fixed `*_logos` not being identified in scripts
 - Fixed `Shell` not working from palen1x_menu
 - Added debug information when running palera1n-c, to diagnose user issues more reliably.
+
 ## 1.0.4
 - Added `Switch` option to palera1n_menu, making you able to switch from and to rootless or rootful.
 - Added `Jailbreak Type:` to palera1n_menu

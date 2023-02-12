@@ -16,9 +16,9 @@ EOF
 prompt 'Ready?: ' input
 # Execute script
 if [ "$input" = "Ready." ]; then
-      scp -o "ProxyCommand=inetcat 44" -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /usr/bin/deploy-rootful.sh root@127.0.0.1:/private/var/tmp
+      scp -o "ProxyCommand=inetcat 44" -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" /usr/bin/deploy-rootful.sh root@127.0.0.1:/var/root
 
-      ssh -o "ProxyCommand=inetcat 44" root@127.0.0.1 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /private/var/tmp && ./deploy-rootful.sh"
+      ssh -o "ProxyCommand=inetcat 44" root@127.0.0.1 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "cd /var/root && ./deploy-rootful.sh"
 else
       echo "Invalid Prompt."
 fi

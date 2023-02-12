@@ -21,7 +21,7 @@ echo 'Dont install on rootless.'
 exit
 fi
 
-cd /private/var/tmp
+cd /var/root
 echo "Downloading Contents.."
 curl -sLOOOOO https://static.palera.in/bootstrap.tar
 curl -sLOOOOO https://static.palera.in/sileo.deb
@@ -30,7 +30,7 @@ sleep 1
 
 echo "Preparing Bootstrap.."
 /sbin/mount -uw /
-tar --preserve-permissions -xkf bootstrap.tar /
+tar --preserve-permissions -xkf bootstrap.tar -C /
 sleep 1
 /usr/bin/chmod 4755 /usr/bin/sudo
 /usr/bin/chown root:wheel /usr/bin/sudo

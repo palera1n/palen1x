@@ -42,14 +42,14 @@ while true; do
       echo "# ${YELLOW}- If you encounter lockdownd errors make sure to${NORMAL}"
       echo "# ${YELLOW}unlock your device and replug.${NORMAL}"
       echo "# ${YELLOW}- arm64e is not supported!${NORMAL}"
-      echo "# == DEBUG =="
+      echo "# ===== DEBUG ====="
       echo "# Chosen Jailbreak Type: ${BLUE}$jbtype${NORMAL}"
       echo "# Chosen Flags: ${BLUE}$args${NORMAL}"
       echo ''
       /usr/local/bin/palera1n $args
       sleep 2
       echo ''
-      echo "# == DEBUG =="
+      echo "# ===== DEBUG ====="
       echo "# Chosen Jailbreak Type: ${BLUE}$jbtype${NORMAL}"
       echo "# Chosen Flags: ${BLUE}$args${NORMAL}"
       echo ''
@@ -93,6 +93,16 @@ while true; do
       echo "# Chosen Flags: ${BLUE}$args${NORMAL}"
       /usr/local/bin/palera1n -f $args
       sleep 2
+        if (( $args[(i)-c] )); then
+          echo "# ==== FAKEFS ====="
+          echo "# You have chosen to create fakeFS, this"
+          echo "# will take up to ${RED}10${NORMAL} minutes!"
+          echo "#"
+          echo "# Once done your device should reboot into the"
+          echo "# un-jailbroken state, and you would need to run"
+          echo "# without ${BLUE}-c${NORMAL}"
+        else
+        fi
       echo ''
       echo "# == DEBUG =="
       echo "# Chosen Jailbreak Type: ${BLUE}$jbtype${NORMAL}"
