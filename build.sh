@@ -121,6 +121,7 @@ umount -v rootfs/proc
 
 # Fetch palera1n-c
 curl -Lo rootfs/usr/bin/palera1n "$PALERA1N"
+chmod +x rootfs/usr/bin/palera1n
 
 # Copy files
 cp -av ../inittab rootfs/etc
