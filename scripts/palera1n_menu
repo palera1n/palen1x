@@ -96,7 +96,7 @@ while true; do
       echo ''
       echo "# == DEBUG =="
       echo "# Chosen Jailbreak Type: ${BLUE}$jbtype${NORMAL}"
-      echo "# Chosen Flags: ${BLUE}$args${NORMAL}"
+      echo "# Chosen Flags: -f ${BLUE}$args${NORMAL}"
       echo ''
       enter_to_quit
       /usr/bin/palera1n_menu

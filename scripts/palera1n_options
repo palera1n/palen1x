@@ -27,9 +27,8 @@ if [ "$jbtype" = "Rootless" ]; then
   "1" "Verbose" OFF \
   "2" "Safe Mode" OFF \
   "3" "Force Revert" OFF \
-  "4" "DFU Helper" OFF \
-  "5" "Serial" OFF \
-  "6" "Debug" ON 3>&1 1>&2 2>&3)"
+  "4" "Serial" OFF \
+  "5" "Debug" ON 3>&1 1>&2 2>&3)"
   if [ $? = 0 ]; then
       output=""
       for OPTION in $OPTIONS; do
@@ -37,12 +36,11 @@ if [ "$jbtype" = "Rootless" ]; then
               "1") output1="-V";;
               "2") output2="-s";;
               "3") output3="--force-revert";;
-              "4") output4="-D";;
-              "5") output5="-e 'serial=3'";;
-              "6") output6="-v";;
+              "4") output4="-e 'serial=3'";;
+              "5") output5="-v";;
           esac
       done
-      echo "$output1 $output2 $output3 $output4 $output5 $output6" > /usr/bin/.args
+      echo "$output1 $output2 $output3 $output4 $output5" > /usr/bin/.args
       /usr/bin/palera1n_menu
   else
       echo "Cancelled"
@@ -50,11 +48,11 @@ if [ "$jbtype" = "Rootless" ]; then
 elif [ "$jbtype" = "Rootful" ]; then
   OPTIONS="$(whiptail --separate-output --nocancel --ok-button "Select" --title "palera1n options" --checklist \
   "Press spacebar to select option, and enter to complete" 15 54 5 \
-  "1" "Create Fakefs" OFF \
-  "2" "Verbose" OFF \
-  "3" "Safe Mode" OFF \
-  "4" "Restore RootFS" OFF \
-  "5" "DFU Helper" OFF \
+  "1" "Create FakeFS" OFF \
+  "2" "Create BindFS 'experimental'" OFF \
+  "3" "Verbose" OFF \
+  "4" "Safe Mode" OFF \
+  "5" "Restore RootFS" OFF \
   "6" "Serial" OFF \
   "7" "Debug" ON 3>&1 1>&2 2>&3)"
   if [ $? = 0 ]; then
@@ -62,10 +60,10 @@ elif [ "$jbtype" = "Rootful" ]; then
       for OPTION in $OPTIONS; do
           case $OPTION in
               "1") output1="-c";;
-              "2") output2="-V";;
-              "3") output3="-s";;
-              "4") output4="--force-revert";;
-              "5") output5="-D";;
+              "2") output2="-B";;
+              "3") output3="-V";;
+              "4") output4="-s";;
+              "5") output5="--force-revert";;
               "6") output6="-e 'serial=3'";;
               "7") output7="-v";;
           esac

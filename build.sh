@@ -49,10 +49,10 @@ apt-get install -y --no-install-recommends wget debootstrap mtools xorriso ca-ce
 # Get proper files for amd64 or i686
 if [ "$ARCH" = 'amd64' ]; then
     ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.1-x86_64.tar.gz'
-    PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86_64'
+    PALERA1N='https://github.com/palera1n/palera1n-c/releases/download/v2.0.0-beta.3/palera1n-linux-x86_64'
 else
     ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86/alpine-minirootfs-3.17.1-x86.tar.gz'
-    PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86'
+    PALERA1N='https://github.com/palera1n/palera1n-c/releases/download/v2.0.0-beta.3/palera1n-linux-x86'
 fi
 
 # Clean up previous attempts
