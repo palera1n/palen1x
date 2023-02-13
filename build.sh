@@ -120,7 +120,7 @@ umount -v rootfs/sys
 umount -v rootfs/proc
 
 # Fetch palera1n-c
-curl -Lo rootfs/usr/local/bin/palera1n "$PALERA1N"
+curl -Lo rootfs/usr/bin/palera1n "$PALERA1N"
 
 # Copy files
 cp -av ../inittab rootfs/etc
