@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.6
+- Added -f to debug info, minor overlook
+- bindFS option now available in palera1n_options 'experimental, may not work with iOS 16'
+- Updated to palera1n-c beta 3
+
 ## 1.0.5
 - Fully switch to an Alpine-based distribution for smaller `.iso` size 
 
