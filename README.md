@@ -25,6 +25,9 @@
 
 - [palera1n-c](https://github.com/palera1n/palera1n-c) will never work in VirtualBox, VMware or any virtual machine that doesn't support a PCI passthrough. If you receive a `Segmentation Fault` that's on you.
 
+- After using `-f -c` or `-f -B` you must use  only `-f` to boot, otherwise it'll spit out an error saying that you already created the fakeFS/bindFS.
+    - (`-f -B` won't work on 16.x, downgrade to 15.6RC if you want to use it). 
+
 - This distro's purpose is to make [palera1n-c](https://github.com/palera1n/palera1n-c) easier and more intuitive(with TUI) to use within a stripped down distribution. Each option in `palera1n_options` correlates to what can be found in palera1n-c documentation. I am not including flags that the user will most likely never need, for example, `-i`. Further documention on [palera1n-c](https://github.com/palera1n/palera1n-c) can be found [here](https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n.1.html).
 
 - Not recommended to mix `Rootful` & `Rootless` types together, but it's still a complete valid option. If you have any issues on removing them both you may go to the Support Discord.
