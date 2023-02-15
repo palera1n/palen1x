@@ -7,8 +7,7 @@
     It aims to be easy to use, have a nice interface and support 32 and 64 bit CPUs.
 </p>
 <p align="center">
-    <a href="https://ios.cfw.guide/using-palen1x/">Guide</a> •
-    <a href="#building-palen1x">Building palen1x</a> •
+    <a href="#Information">Information</a> •
     <a href="#contributing">Contributing</a> •
     <a href="#credits">Credits</a> •
     <a href="https://github.com/palera1n/palen1x/blob/main/CHANGELOG.md">Changelog</a> • 
@@ -36,10 +35,12 @@
 
 - On `A11`, **you must disable your passcode while in the jailbroken state** (on iOS 16, you need to reset your device before proceeding with palera1n-c on `A11`).
 
-# Guide
+# Information
 **Make an [iCloud/iTunes backup](https://support.apple.com/en-us/HT203977) before using, so that you can go back if something goes wrong**.
 
-### Guide for palen1x can be found [here](https://ios.cfw.guide/using-palen1x/).
+- ### Downloads for palen1x can be found [here](https://cdn.nickchan.lol/palera1n/artifacts/palen1x/).
+
+- ### Guide for palen1x can be found [here](https://ios.cfw.guide/using-palen1x/).
 
 # Building palen1x
 To change the version of palen1x, either change `version` file, or manually specify it with `./build.sh`.

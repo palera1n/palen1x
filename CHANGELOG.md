@@ -1,6 +1,9 @@
 # Changelog
 
-## 1.0.6
+## 1.0.7
+- Updated to palera1n-c beta 4
+
+## 1.0.6 :fr:
 - Added -f to debug info, minor overlook
 - bindFS option now available in palera1n_options 'experimental, may not work with iOS 16'
 - Updated to palera1n-c beta 3
