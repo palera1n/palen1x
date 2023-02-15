@@ -7,7 +7,7 @@
     It aims to be easy to use, have a nice interface and support 32 and 64 bit CPUs.
 </p>
 <p align="center">
-    <a href="#usage">Usage</a> •
+    <a href="https://ios.cfw.guide/using-palen1x/">Guide</a> •
     <a href="#building-palen1x">Building palen1x</a> •
     <a href="#contributing">Contributing</a> •
     <a href="#credits">Credits</a> •
@@ -36,15 +36,10 @@
 
 - On `A11`, **you must disable your passcode while in the jailbroken state** (on iOS 16, you need to reset your device before proceeding with palera1n-c on `A11`).
 
-# Usage
-**Make an [iCloud/iTunes backup](https://support.apple.com/en-us/HT203977) before using palen1x, so that you can go back if something goes wrong**.
+# Guide
+**Make an [iCloud/iTunes backup](https://support.apple.com/en-us/HT203977) before using, so that you can go back if something goes wrong**.
 
-The `amd64` iso is for 64-bit CPUs (AMD and Intel) and the `i686` one is for 32-bit CPUs. If you are unsure which one to download, the `amd64` ISO will work in most cases.
-
-1. Download an `.iso` [here](https://cdn.nickchan.lol/palera1n/artifacts/palen1x) (latest is recommended).
-2. Download [balenaEtcher](https://www.balena.io/etcher/).
-3. Open balenaEtcher and write the `.iso` you downloaded to your USB drive.
-4. Reboot, enter your BIOS's boot menu and select the USB drive.
+### Guide for palen1x can be found [here](https://ios.cfw.guide/using-palen1x/).
 
 # Building palen1x
 To change the version of palen1x, either change `version` file, or manually specify it with `./build.sh`.
