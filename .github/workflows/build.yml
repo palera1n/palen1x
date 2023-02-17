@@ -3,6 +3,12 @@ name: Build palen1x
 on:
   push:
     branches: [ main ]
+    paths:
+      - scripts/**
+      - build.sh
+      - inittab
+      - version
+      
   workflow_dispatch:
 
 jobs:
