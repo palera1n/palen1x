@@ -8,7 +8,7 @@ on:
       - build.sh
       - inittab
       - version
-      
+      - '.github/workflows/build.yml'
   workflow_dispatch:
 
 jobs:
