@@ -150,5 +150,5 @@ find . | cpio -oH newc | xz -C crc32 --x86 -vz9eT0 > ../iso/boot/initramfs.xz
 popd
 
 # ISO creation
-grub-mkrescue -o "c-palen1x-$VERSION-$ARCH.iso" iso --compress=xz
+grub-mkrescue -o "palen1x-$VERSION-$ARCH.iso" iso --compress=xz
 
