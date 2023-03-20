@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Build for amd64
         run: |
@@ -37,7 +37,7 @@ jobs:
       - name: Prepare upload
         run: |
           for i in work/*.iso; do sudo mv $i palen1x; done
-          
+
       - name: Upload artifact
         uses: wangyucode/sftp-upload-action@v1.4.8
         with:

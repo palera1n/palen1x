@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Load functions and variables
 . /usr/bin/common
 
@@ -22,4 +22,3 @@ if [ "$input" = "Ready." ]; then
 else
       echo "Invalid Prompt."
 fi
-

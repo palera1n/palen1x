@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Load functions and variables
 jbt=$(cat /usr/bin/.jbtype)
 jbtype=$(echo $jbt)
