@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #
 # palen1x build script
 # Made with <3 https://github.com/palera1n/palen1x
@@ -25,13 +25,17 @@ cat << EOF
       ${BLUE}((((((((((((######%%%%%%%${NORMAL}
        ${BLUE}(((((((((#####%%*${NORMAL}
         ${BLUE}/(((((##${NORMAL}                  build script
-
+        
 EOF
-# Ask for the architecture if variable is empty
+# Ask for the version and architecture if variables are empty
+while [ -z "$VERSION" ]; do
+    printf 'Version: '
+    read -r VERSION
+done
 until [ "$ARCH" = 'amd64' ] || [ "$ARCH" = 'i686' ]; do
     echo '1 amd64'
     echo '2 i686'
-    printf 'Which architecture? amd64 (default) or i686'
+    printf 'Which architecture? amd64 (default), i686, or aarch64 '
     read -r input_arch
     [ "$input_arch" = 1 ] && ARCH='amd64'
     [ "$input_arch" = 2 ] && ARCH='i686'
@@ -40,9 +44,7 @@ done
 
 # Install dependencies to build palen1x
 apt-get update
-apt-get install -y --no-install-recommends ca-certificates cpio curl grub2-common grub-efi-amd64-bin grub-pc-bin gzip mtools tar xorriso xz-utils
-
-VERSION="$(cat version)"
+apt-get install -y --no-install-recommends wget debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
 
 # Get proper files for amd64 or i686
 if [ "$ARCH" = 'amd64' ]; then
@@ -54,7 +56,9 @@ else
 fi
 
 # Clean up previous attempts
-umount -v work/rootfs/{dev,sys,proc} >/dev/null 2>&1
+umount -v work/rootfs/dev >/dev/null 2>&1
+umount -v work/rootfs/sys >/dev/null 2>&1
+umount -v work/rootfs/proc >/dev/null 2>&1
 rm -rf work
 mkdir -pv work/{rootfs,iso/boot/grub}
 cd work
@@ -66,8 +70,8 @@ mount -vt sysfs sysfs rootfs/sys
 mount -vt proc proc rootfs/proc
 cp /etc/resolv.conf rootfs/etc
 cat << ! > rootfs/etc/apk/repositories
-http://dl-cdn.alpinelinux.org/alpine/v3.13/main
-http://dl-cdn.alpinelinux.org/alpine/v3.13/community
+http://dl-cdn.alpinelinux.org/alpine/v3.12/main
+http://dl-cdn.alpinelinux.org/alpine/edge/community
 http://dl-cdn.alpinelinux.org/alpine/edge/testing
 !
 
@@ -98,7 +102,8 @@ chroot rootfs /usr/bin/env PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin \
 	/sbin/mkinitfs -F "palen1x" -k -t /tmp -q $(ls rootfs/lib/modules)
 rm -rfv rootfs/lib/modules
 mv -v rootfs/tmp/lib/modules rootfs/lib
-find rootfs/lib/modules/* -type f -name "*.ko" -exec strip -v --strip-unneeded {} \; -exec xz --x86 -v9eT0 \;
+find rootfs/lib/modules/* -type f -name "*.ko" | xargs -n1 -P`nproc` -- strip -v --strip-unneeded
+find rootfs/lib/modules/* -type f -name "*.ko" | xargs -n1 -P`nproc` -- xz --x86 -v9eT0
 depmod -b rootfs $(ls rootfs/lib/modules)
 
 # Echo TUI configurations
@@ -110,7 +115,9 @@ echo "Rootful" > rootfs/usr/bin/.jbtype
 echo "" > rootfs/usr/bin/.args
 
 # Unmount fs
-umount -v rootfs/{dev,sys,proc}
+umount -v rootfs/dev
+umount -v rootfs/sys
+umount -v rootfs/proc
 
 # Fetch palera1n-c
 curl -Lo rootfs/usr/bin/palera1n "$PALERA1N"
@@ -135,8 +142,11 @@ boot
 
 # initramfs
 pushd rootfs
-rm -rfv tmp/* boot/* var/cache/* etc/resolv.conf
-find . | cpio -oH newc | xz -C crc32 --x86 -vz9eT$(nproc --all) > ../iso/boot/initramfs.xz
+rm -rfv tmp/*
+rm -rfv boot/*
+rm -rfv var/cache/*
+rm -fv etc/resolv.conf
+find . | cpio -oH newc | xz -C crc32 --x86 -vz9eT0 > ../iso/boot/initramfs.xz
 popd
 
 # ISO creation
