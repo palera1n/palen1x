@@ -90,7 +90,7 @@ while true; do
       echo "# ${YELLOW}- arm64e is not supported!${NORMAL}"
       echo "# == DEBUG =="
       echo "# Chosen Jailbreak Type: ${BLUE}$jbtype${NORMAL}"
-      echo "# Chosen Flags: ${BLUE}$args${NORMAL}"
+      echo "# Chosen Flags: -f ${BLUE}$args${NORMAL}"
       /usr/bin/palera1n -f $args
       sleep 2
       echo ''
