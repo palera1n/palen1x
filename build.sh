@@ -56,9 +56,7 @@ else
 fi
 
 # Clean up previous attempts
-umount -v work/rootfs/dev >/dev/null 2>&1
-umount -v work/rootfs/sys >/dev/null 2>&1
-umount -v work/rootfs/proc >/dev/null 2>&1
+umount -v work/rootfs/{dev,sys,proc} >/dev/null 2>&1
 rm -rf work
 mkdir -pv work/{rootfs,iso/boot/grub}
 cd work
@@ -102,22 +100,19 @@ chroot rootfs /usr/bin/env PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin \
 	/sbin/mkinitfs -F "palen1x" -k -t /tmp -q $(ls rootfs/lib/modules)
 rm -rfv rootfs/lib/modules
 mv -v rootfs/tmp/lib/modules rootfs/lib
-find rootfs/lib/modules/* -type f -name "*.ko" | xargs -n1 -P`nproc` -- strip -v --strip-unneeded
-find rootfs/lib/modules/* -type f -name "*.ko" | xargs -n1 -P`nproc` -- xz --x86 -v9eT0
+find rootfs/lib/modules/* -type f -name "*.ko" -exec strip -v --strip-unneeded {} \; -exec xz --x86 -v9eT0 \;
 depmod -b rootfs $(ls rootfs/lib/modules)
 
 # Echo TUI configurations
 echo 'palen1x' > rootfs/etc/hostname
-echo "PATH=$PATH:$HOME/.local/bin" >> rootfs/root/.bashrc
+echo "PATH=$PATH:$HOME/.local/bin" > rootfs/root/.bashrc # d
 echo "export PALEN1X_VERSION='$VERSION'" > rootfs/root/.bashrc
 echo '/usr/bin/palen1x_menu' >> rootfs/root/.bashrc
 echo "Rootful" > rootfs/usr/bin/.jbtype
 echo "" > rootfs/usr/bin/.args
 
 # Unmount fs
-umount -v rootfs/dev
-umount -v rootfs/sys
-umount -v rootfs/proc
+umount -v rootfs/{dev,sys,proc}
 
 # Fetch palera1n-c
 curl -Lo rootfs/usr/bin/palera1n "$PALERA1N"
@@ -142,11 +137,8 @@ boot
 
 # initramfs
 pushd rootfs
-rm -rfv tmp/*
-rm -rfv boot/*
-rm -rfv var/cache/*
-rm -fv etc/resolv.conf
-find . | cpio -oH newc | xz -C crc32 --x86 -vz9eT0 > ../iso/boot/initramfs.xz
+rm -rfv tmp/* boot/* var/cache/* etc/resolv.conf
+find . | cpio -oH newc | xz -C crc32 --x86 -vz9eT$(nproc --all) > ../iso/boot/initramfs.xz
 popd
 
 # ISO creation
