@@ -38,7 +38,6 @@ jobs:
 
       - name: Upload artifact to cdn.nickchan.lol
         uses: wangyucode/sftp-upload-action@v1.4.8
-        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           host: ${{ secrets.NICKCHAN_FTP_HOST }}
           port: ${{ secrets.NICKCHAN_FTP_PORT }}
