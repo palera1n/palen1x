@@ -30,16 +30,3 @@ jobs:
         with:
           name: ${{ matrix.arch }}-iso
           path: work/*-${{ matrix.arch }}.iso
-
-      - name: Upload artifact to cdn.nickchan.lol
-        uses: wangyucode/sftp-upload-action@v1.4.8
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          host: ${{ secrets.NICKCHAN_FTP_HOST }}
-          port: ${{ secrets.NICKCHAN_FTP_PORT }}
-          username: palera1n
-          privateKey: ${{ secrets.NICKCHAN_FTP_KEY }}
-          forceUpload: true
-          dryRun: false
-          localDir: 'work/'
-          remoteDir: '/palera1n/artifacts/palen1x'

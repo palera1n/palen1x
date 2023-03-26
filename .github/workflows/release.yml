@@ -1,0 +1,47 @@
+name: Draft release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [ amd64, i686 ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get version
+        id: version
+        run: echo "VERSION=$(cat version)" >> $GITHUB_ENV
+
+      - name: Build
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: |
+          sudo -E ./build.sh
+
+      - name: Draft release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          draft: true
+          files: work/*.iso
+
+      - name: Upload artifact to cdn.nickchan.lol
+        uses: wangyucode/sftp-upload-action@v1.4.8
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          host: ${{ secrets.NICKCHAN_FTP_HOST }}
+          port: ${{ secrets.NICKCHAN_FTP_PORT }}
+          username: palera1n
+          privateKey: ${{ secrets.NICKCHAN_FTP_KEY }}
+          forceUpload: true
+          dryRun: false
+          localDir: 'work/'
+          remoteDir: '/palera1n/artifacts/palen1x'
