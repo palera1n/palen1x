@@ -12,6 +12,9 @@ jobs:
       fail-fast: false
       matrix:
         arch: [ amd64, i686 ]
+    permissions:
+      # needed to create release
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
