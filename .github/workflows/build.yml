@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: [ amd64, i686 ]
+        arch: [ amd64, i686, aarch64 ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
