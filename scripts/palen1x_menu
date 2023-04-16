@@ -48,14 +48,14 @@ while true; do
       /sbin/poweroff
       ;;
     5)
-    	clear
-    	/usr/bin/palera1n -n
-    	sleep 2
-    	echo ""
-    	echo "# Your device should now boot back into normal mode."
-    	enter_to_quit
-    	/usr/bin/palen1x_menu
-    	;;
+      clear
+      /usr/bin/palera1n -n
+      sleep 2
+      echo ""
+      echo "# Your device should now boot back into normal mode."
+      enter_to_quit
+      /usr/bin/palen1x_menu
+      ;;
     6)
       palen1x_logo
       sleep 2
