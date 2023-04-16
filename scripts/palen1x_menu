@@ -22,12 +22,13 @@ whiptail_height="$(($(tput lines) - 6))"
 whiptail_width="$(($(tput cols) - 20))"
 
 while true; do
-  CHOICE="$(whiptail --nocancel --title "palen1x $PALEN1X_VERSION | use arrow keys" --menu '' $whiptail_height $whiptail_width 8 \
+  CHOICE="$(whiptail --nocancel --title "palen1x $PALEN1X_VERSION | use arrow keys" --menu '' $whiptail_height $whiptail_width 9 \
     '1' 'palera1n' \
     '2' 'SSH' \
     '3' 'Shell' \
     '4' 'Shut down' \
-    '5' 'Reboot' 3>&1 1>&2 2>&3)"
+    '5' 'Exit recovery' \
+    '6' 'Reboot' 3>&1 1>&2 2>&3)"
   case "$CHOICE" in
     1)
       clear
@@ -47,6 +48,15 @@ while true; do
       /sbin/poweroff
       ;;
     5)
+    	clear
+    	/usr/bin/palera1n -n
+    	sleep 2
+    	echo ""
+    	echo "# Your device should now boot back into normal mode."
+    	enter_to_quit
+    	/usr/bin/palen1x_menu
+    	;;
+    6)
       palen1x_logo
       sleep 2
       /sbin/reboot
