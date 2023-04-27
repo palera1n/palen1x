@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Load functions and variables
 . /usr/bin/common
-PALEN1X_VERSION="1.0.8"
+PALEN1X_VERSION="1.0.9"
 
 export NEWT_COLORS='root=,black
 border=white,black
