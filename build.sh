@@ -85,9 +85,9 @@ elif [ "$1" = "NIGHTLY" ]; then
             PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/main/${latest_build}/palera1n-linux-arm64'
             ;;
     esac
-elif
+elif [[ -z "$BUILD_TYPE" ]]; then
+    echo "ERROR: NO BUILD TYPE CHOSEN"
     break
-    print("ERROR: NO BUILD TYPE CHOSEN")
 fi
 
 
