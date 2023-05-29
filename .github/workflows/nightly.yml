@@ -33,7 +33,7 @@ jobs:
         run: |
           mkdir palen1x
           cp work/*-${{ matrix.arch }}.iso palen1x
-          cp work/iso/boot/initramfs.xz palen1x
+          cp work/iso/boot/initramfs.xz palen1x/initramfs-${{ matrix.arch }}.xz
   
       - name: Upload artifact to cdn.nickchan.lol
         uses: wangyucode/sftp-upload-action@v1.4.8
