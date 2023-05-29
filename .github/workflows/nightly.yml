@@ -1,20 +1,14 @@
-name: Draft release
+name: Build palen1x (Nightly)
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - 'v*'
 
 jobs:
-  release:
+  build:
     strategy:
       fail-fast: false
       matrix:
-        arch: [ amd64, i686 ]
-    permissions:
-      # needed to create release
-      contents: write
+        arch: [ amd64, i686, aarch64 ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,18 +18,23 @@ jobs:
         id: version
         run: echo "VERSION=$(cat version)" >> $GITHUB_ENV
 
+      - name: Install qemu-user-static
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+
       - name: Build
         env:
           ARCH: ${{ matrix.arch }}
         run: |
-          sudo -E ./build.sh
+          sudo -E ./build.sh NIGHTLY
 
-      - name: Draft release
-        uses: softprops/action-gh-release@v0.1.15
-        with:
-          draft: true
-          files: work/*.iso
-
+      - name: Prepare artifact
+        run: |
+          mkdir palen1x
+          cp work/*-${{ matrix.arch }}.iso palen1x
+          cp work/iso/boot/initramfs.xz palen1x
+  
       - name: Upload artifact to cdn.nickchan.lol
         uses: wangyucode/sftp-upload-action@v1.4.8
         with:
@@ -45,5 +44,5 @@ jobs:
           privateKey: ${{ secrets.NICKCHAN_FTP_KEY }}
           forceUpload: true
           dryRun: false
-          localDir: 'work/'
-          remoteDir: '/palera1n/artifacts/palen1x'
+          localDir: 'palen1x/'
+          remoteDir: '/palera1n/artifacts/palen1x/nightly'

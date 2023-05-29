@@ -46,19 +46,50 @@ done
 
 # Install dependencies to build palen1x
 apt-get update
-apt-get install -y --no-install-recommends wget debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
+apt-get install -y --no-install-recommends wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
 
-# Get proper files for amd64 or i686
-if [ "$ARCH" = 'amd64' ]; then
-    ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.3-x86_64.tar.gz'
-    PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86_64'
-elif [ "$ARCH" = 'i686' ]; then
-    ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86/alpine-minirootfs-3.17.3-x86.tar.gz'
-    PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-x86'
-elif [ "$ARCH" = 'aarch64' ]; then
-    ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/aarch64/alpine-minirootfs-3.17.3-aarch64.tar.gz'
-    PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/palera1n-linux-arm64'
+# Get proper files
+if [ "$1" = "RELEASE" ]; then
+    case "$ARCH" in
+        'amd64')
+            ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.3-x86_64.tar.gz'
+            PALERA1N='https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n-linux-x86_64'
+            ;;
+        'i686')
+            ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86/alpine-minirootfs-3.17.3-x86.tar.gz'
+            PALERA1N='https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n-linux-x86'
+            ;;
+        'aarch64')
+            ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/aarch64/alpine-minirootfs-3.17.3-aarch64.tar.gz'
+            PALERA1N='https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n-linux-arm64'
+            ;;
+    esac
+elif [ "$1" = "NIGHTLY" ]; then
+
+    url="https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/main/"
+    latest_build=0
+    html=$(curl -s "$url")
+    latest_build=$(echo "$html" | awk -F'href="' '{print $2}' | awk -F'/' 'NF>1{print $1}' | sort -nr | head -1)
+
+    case "$ARCH" in
+        'amd64')
+            ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.3-x86_64.tar.gz'
+            PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/main/${latest_build}/palera1n-linux-x86_64'
+            ;;
+        'i686')
+            ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86/alpine-minirootfs-3.17.3-x86.tar.gz'
+            PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/main/${latest_build}/palera1n-linux-x86'
+            ;;
+        'aarch64')
+            ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/aarch64/alpine-minirootfs-3.17.3-aarch64.tar.gz'
+            PALERA1N='https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/main/${latest_build}/palera1n-linux-arm64'
+            ;;
+    esac
+elif
+    break
+    print("ERROR: NO BUILD TYPE CHOSEN")
 fi
+
 
 # Clean up previous attempts
 umount -v work/rootfs/{dev,sys,proc} >/dev/null 2>&1

@@ -1,8 +1,6 @@
 name: Build palen1x
 
 on:
-  push:
-  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -29,7 +27,7 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}
         run: |
-          sudo -E ./build.sh
+          sudo -E ./build.sh RELEASE
 
       - name: Prepare artifact
         run: |
@@ -37,8 +35,14 @@ jobs:
           cp work/*-${{ matrix.arch }}.iso palen1x
           cp work/iso/boot/initramfs.xz palen1x
 
-      - name: Upload artifact to GitHub
-        uses: actions/upload-artifact@v3
+      - name: Upload artifact to cdn.nickchan.lol
+        uses: wangyucode/sftp-upload-action@v1.4.8
         with:
-          name: ${{ matrix.arch }}
-          path: palen1x
+          host: ${{ secrets.NICKCHAN_FTP_HOST }}
+          port: ${{ secrets.NICKCHAN_FTP_PORT }}
+          username: palera1n
+          privateKey: ${{ secrets.NICKCHAN_FTP_KEY }}
+          forceUpload: true
+          dryRun: false
+          localDir: 'palen1x/'
+          remoteDir: '/palera1n/artifacts/palen1x/release'
