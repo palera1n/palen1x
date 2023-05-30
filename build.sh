@@ -53,15 +53,15 @@ if [ "$1" = "RELEASE" ]; then
     case "$ARCH" in
         'amd64')
             ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.3-x86_64.tar.gz'
-            PALERA1N="https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n-linux-x86_64"
+            PALERA1N="https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.7/palera1n-linux-x86_64"
             ;;
         'i686')
             ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86/alpine-minirootfs-3.17.3-x86.tar.gz'
-            PALERA1N="https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n-linux-x86"
+            PALERA1N="https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.7/palera1n-linux-x86"
             ;;
         'aarch64')
             ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/aarch64/alpine-minirootfs-3.17.3-aarch64.tar.gz'
-            PALERA1N="https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n-linux-arm64"
+            PALERA1N="https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.7/palera1n-linux-arm64"
             ;;
     esac
     echo "INFO: RELEASE CHOSEN"
