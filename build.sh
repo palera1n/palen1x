@@ -32,21 +32,23 @@ while [ -z "$VERSION" ]; do
     printf 'Version: '
     read -r VERSION
 done
-until [ "$ARCH" = 'amd64' ] || [ "$ARCH" = 'i686' ] || [ "$ARCH" = 'aarch64' ]; do
+until [ "$ARCH" = 'amd64' ] || [ "$ARCH" = 'i686' ] || [ "$ARCH" = 'aarch64' ] || [ "$ARCH" = 'armv7' ]; do
     echo '1 amd64'
     echo '2 i686'
     echo '3 aarch64'
-    printf 'Which architecture? amd64 (default), i686, or aarch64 '
+    echo '4 armv7'
+    printf 'Which architecture? amd64 (default), i686, or aarch64 or armv7'
     read -r input_arch
     [ "$input_arch" = 1 ] && ARCH='amd64'
     [ "$input_arch" = 2 ] && ARCH='i686'
     [ "$input_arch" = 3 ] && ARCH='aarch64'
+    [ "$input_arch" = 4 ] && ARCH='armv7'
     [ -z "$input_arch" ] && ARCH='amd64'
 done
 
 # Install dependencies to build palen1x
 apt-get update
-apt-get install -y --no-install-recommends wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
+apt-get install -y --no-install-recommends wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev grub-common qemu-user-static
 
 # Get proper files
 if [ "$1" = "RELEASE" ]; then
@@ -63,16 +65,21 @@ if [ "$1" = "RELEASE" ]; then
             ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/aarch64/alpine-minirootfs-3.17.3-aarch64.tar.gz'
             PALERA1N="https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.7/palera1n-linux-arm64"
             ;;
+        'armv7')
+            ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/armv7/alpine-minirootfs-3.17.3-armv7.tar.gz'
+            PALERA1N="https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.7/palera1n-linux-armel"
+            ;;
     esac
     echo "INFO: RELEASE CHOSEN"
 elif [ "$1" = "NIGHTLY" ]; then
+
 
     url="https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/main/"
     latest_build=0
     html=$(curl -s "$url")
     latest_build=$(echo "$html" | awk -F'href="' '{print $2}' | awk -F'/' 'NF>1{print $1}' | sort -nr | head -1)
 
-    case "$ARCH" in
+     case "$ARCH" in
         'amd64')
             ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.3-x86_64.tar.gz'
             PALERA1N="https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/main/$latest_build/palera1n-linux-x86_64"
@@ -84,6 +91,10 @@ elif [ "$1" = "NIGHTLY" ]; then
         'aarch64')
             ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/aarch64/alpine-minirootfs-3.17.3-aarch64.tar.gz'
             PALERA1N="https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/main/$latest_build/palera1n-linux-arm64"
+            ;;
+        'armv7')
+            ROOTFS='https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/armv7/alpine-minirootfs-3.17.3-armv7.tar.gz'
+            PALERA1N="https://cdn.nickchan.lol/palera1n/artifacts/c-rewrite/main/$latest_build/palera1n-linux-armel"
             ;;
     esac
     echo "INFO: NIGHTLY CHOSEN"
