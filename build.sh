@@ -48,7 +48,7 @@ done
 
 # Install dependencies to build palen1x
 apt-get update
-apt-get install -y --no-install-recommends wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev grub-common qemu-user-static
+apt-get install -y --no-install-recommends wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
 
 # Get proper files
 if [ "$1" = "RELEASE" ]; then
