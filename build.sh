@@ -156,7 +156,7 @@ echo 'palen1x' > rootfs/etc/hostname
 echo "PATH=$PATH:$HOME/.local/bin" > rootfs/root/.bashrc # d
 echo "export PALEN1X_VERSION='$VERSION'" > rootfs/root/.bashrc
 echo '/usr/bin/palen1x_menu' >> rootfs/root/.bashrc
-echo "Rootful" > rootfs/usr/bin/.jbtype
+echo "Rootless" > rootfs/usr/bin/.jbtype
 echo "" > rootfs/usr/bin/.args
 
 # Unmount fs
