@@ -49,7 +49,7 @@ elif [ "$jbtype" = "Rootful" ]; then
   OPTIONS="$(whiptail --separate-output --nocancel --ok-button "Select" --title "palera1n options" --checklist \
   "Press spacebar to select option, and enter to complete" 15 54 5 \
   "1" "Create FakeFS" OFF \
-  "2" "Create BindFS 'experimental'" OFF \
+  "2" "Create BindFS (experimental)" OFF \
   "3" "Verbose" OFF \
   "4" "Safe Mode" OFF \
   "5" "Restore RootFS" OFF \
