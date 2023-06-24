@@ -26,7 +26,7 @@ if [ "$jbtype" = "Rootless" ]; then
   "Press spacebar to select option, and enter to complete" 15 54 5 \
   "1" "Verbose" OFF \
   "2" "Safe Mode" OFF \
-  "3" "Force Revert" OFF \
+  "3" "Revert Install" OFF \
   "4" "Serial" OFF \
   "5" "Debug" ON 3>&1 1>&2 2>&3)"
   if [ $? = 0 ]; then
@@ -52,7 +52,7 @@ elif [ "$jbtype" = "Rootful" ]; then
   "2" "Create BindFS (experimental)" OFF \
   "3" "Verbose" OFF \
   "4" "Safe Mode" OFF \
-  "5" "Restore RootFS" OFF \
+  "5" "Revert Install" OFF \
   "6" "Serial" OFF \
   "7" "Debug" ON 3>&1 1>&2 2>&3)"
   if [ $? = 0 ]; then
