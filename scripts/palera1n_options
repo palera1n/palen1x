@@ -24,11 +24,11 @@ whiptail_width="$(($(tput cols) - 20))"
 if [ "$jbtype" = "Rootless" ]; then
   OPTIONS="$(whiptail --separate-output --nocancel --ok-button "Select" --title "palera1n options" --checklist \
   "Press spacebar to select option, and enter to complete" 15 54 5 \
-  "1" "Verbose" OFF \
+  "1" "Verbose" ON \
   "2" "Safe Mode" OFF \
   "3" "Revert Install" OFF \
   "4" "Serial" OFF \
-  "5" "Debug" ON 3>&1 1>&2 2>&3)"
+  "5" "Debug" OFF 3>&1 1>&2 2>&3)"
   if [ $? = 0 ]; then
       output=""
       for OPTION in $OPTIONS; do
@@ -49,12 +49,12 @@ elif [ "$jbtype" = "Rootful" ]; then
   OPTIONS="$(whiptail --separate-output --nocancel --ok-button "Select" --title "palera1n options" --checklist \
   "Press spacebar to select option, and enter to complete" 15 54 5 \
   "1" "Create FakeFS" OFF \
-  "2" "Create BindFS (experimental)" OFF \
-  "3" "Verbose" OFF \
+  "2" "Create BindFS" OFF \
+  "3" "Verbose" ON \
   "4" "Safe Mode" OFF \
   "5" "Revert Install" OFF \
   "6" "Serial" OFF \
-  "7" "Debug" ON 3>&1 1>&2 2>&3)"
+  "7" "Debug" OFF 3>&1 1>&2 2>&3)"
   if [ $? = 0 ]; then
       output=""
       for OPTION in $OPTIONS; do
