@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2023 flowerible \
+Copyright (c) 2023 samiiau \
 Copyright (c) 2022 raspberryenvoie \
 Copyright (c) 2022 Asineth
 
