@@ -62,10 +62,6 @@ while true; do
       ;;
     3)
       clear
-      /usr/bin/palera1n_switch
-      ;;
-    4)
-      clear
       /usr/bin/palen1x_menu
       ;;
   esac
@@ -106,10 +102,6 @@ while true; do
       /usr/bin/palera1n_options
       ;;
     3)
-      clear
-      /usr/bin/palera1n_switch
-      ;;
-    4)
       clear
       /usr/bin/palen1x_menu
       ;;
