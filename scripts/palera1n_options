@@ -50,25 +50,27 @@ elif [ "$jbtype" = "Rootful" ]; then
   "Press spacebar to select option, and enter to complete" 15 54 5 \
   "1" "Create FakeFS" OFF \
   "2" "Create BindFS" OFF \
-  "3" "Verbose" ON \
-  "4" "Safe Mode" OFF \
-  "5" "Revert Install" OFF \
-  "6" "Serial" OFF \
-  "7" "Debug" OFF 3>&1 1>&2 2>&3)"
+  "3" "Clean FakeFS" OFF \
+  "4" "Verbose" ON \
+  "5" "Safe Mode" OFF \
+  "6" "Revert Install" OFF \
+  "7" "Serial" OFF \
+  "8" "Debug" OFF 3>&1 1>&2 2>&3)"
   if [ $? = 0 ]; then
       output=""
       for OPTION in $OPTIONS; do
           case $OPTION in
               "1") output1="-c";;
               "2") output2="-B";;
-              "3") output3="-V";;
-              "4") output4="-s";;
-              "5") output5="--force-revert";;
-              "6") output6="-e 'serial=3'";;
-              "7") output7="-v";;
+              "3") output3="-C";;
+              "4") output4="-V";;
+              "5") output5="-s";;
+              "6") output6="--force-revert";;
+              "7") output7="-e 'serial=3'";;
+              "8") output8="-v";;
           esac
       done
-      echo "$output1 $output2 $output3 $output4 $output5 $output6 $output7" > /usr/bin/.args
+      echo "$output1 $output2 $output3 $output4 $output5 $output6 $output7 $output8" > /usr/bin/.args
       /usr/bin/palera1n_menu
   else
       echo "Cancelled"
