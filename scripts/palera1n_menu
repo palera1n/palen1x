@@ -42,6 +42,7 @@ while true; do
       echo "# ${YELLOW}- If you encounter lockdownd errors make sure to${NORMAL}"
       echo "# ${YELLOW}unlock your device and replug.${NORMAL}"
       echo "# ${YELLOW}- arm64e is not supported!${NORMAL}"
+      echo "# ${YELLOW}- You may encounter issues with AMD cpus.${NORMAL}"
       echo "# ===== DEBUG ====="
       echo "# Chosen Jailbreak Type: ${BLUE}$jbtype${NORMAL}"
       echo "# Chosen Flags: ${BLUE}$args${NORMAL}"
