@@ -86,6 +86,8 @@ while true; do
       clear
       echo ''
       echo "# == INFORMATION =="
+      echo "# ${YELLOW}- Rootful has been depreciated, and does not support iPadOS 17.${NORMAL}"
+      echo "# ${YELLOW}- palen1x no longer supports fakefs/bindfs creation.${NORMAL}"
       echo "# ${YELLOW}- If you encounter lockdownd errors make sure to${NORMAL}"
       echo "# ${YELLOW}unlock your device and replug.${NORMAL}"
       echo "# ${YELLOW}- arm64e is not supported!${NORMAL}"
