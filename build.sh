@@ -216,12 +216,12 @@ boot
 EOF
 
 # Echo TUI configurations
-echo 'palen1x' > rootfs/etc/hostname
-echo "PATH=$PATH:$HOME/.local/bin" > rootfs/root/.bashrc # d
-echo "export PALEN1X_VERSION='$VERSION'" > rootfs/root/.bashrc
-echo '/usr/bin/palen1x_menu' >> rootfs/root/.bashrc
-echo "Rootless" > rootfs/usr/bin/.jbtype
-echo "" > rootfs/usr/bin/.args
+echo 'palen1x' > work/chroot/etc/hostname
+echo "PATH=$PATH:$HOME/.local/bin" > work/chroot/root/.bashrc # d
+echo "export PALEN1X_VERSION='$VERSION'" > work/chroot/root/.bashrc
+echo '/usr/bin/palen1x_menu' >> work/chroot/root/.bashrc
+echo "Rootless" > work/chroot/usr/bin/.jbtype
+echo "" > work/chroot/usr/bin/.args
 
 rm -f work/chroot/etc/resolv.conf
 
