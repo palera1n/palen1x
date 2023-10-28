@@ -19,7 +19,7 @@ jobs:
       - name: Build for i686
         run: |
           sed -i "s/ARCH='amd64'/ARCH='i686'/g" build.sh
-          sudo ./build.sh
+          sudo ./build.sh RELEASE
 
           
       - name: Prepare artifact
