@@ -5,29 +5,22 @@ on:
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        arch: [ amd64, i686 ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Get version
-        id: version
-        run: echo "VERSION=$(cat version)" >> $GITHUB_ENV
-
-      - name: Install qemu-user-static
+      - name: Build for amd64
         run: |
-          sudo apt-get update
-          sudo apt-get install -y qemu-user-static
-
-      - name: Build
-        env:
-          ARCH: ${{ matrix.arch }}
-        run: |
+          sed -i "/Exit if user isn't root/aVERSION='$(cat version)'" build.sh
+          sed -i "/Exit if user isn't root/aARCH='amd64'" build.sh
           sudo ./build.sh
+
+      - name: Build for i686
+        run: |
+          sed -i "s/ARCH='amd64'/ARCH='i686'/g" build.sh
+          sudo ./build.sh
+
           
       - name: Prepare artifact
         run: |
