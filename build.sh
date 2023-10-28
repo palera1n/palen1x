@@ -185,7 +185,7 @@ sleep 1
 cp scripts/* work/chroot/usr/bin/
 
 (
-    cd work/chroot/usr/local/bin
+    cd work/chroot/usr/bin
     curl -L -o palera1n "$PALERA1N"
     chmod +x palera1n
 )

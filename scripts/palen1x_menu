@@ -40,7 +40,7 @@ while true; do
       ;;
     3)
       clear
-      /bin/bash -i && exit
+      break
       ;;
     4)
       palen1x_logo
