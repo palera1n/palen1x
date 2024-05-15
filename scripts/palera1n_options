@@ -40,7 +40,7 @@ if [ "$jbtype" = "Rootless" ]; then
               "5") output5="-v";;
           esac
       done
-      echo "$output1 $output2 $output3 $output4 $output5" > /usr/bin/.args
+      echo "--cli -l $output1 $output2 $output3 $output4 $output5" > /usr/bin/.args
       /usr/bin/palera1n_menu
   else
       echo "Cancelled"
@@ -70,7 +70,7 @@ elif [ "$jbtype" = "Rootful" ]; then
               "8") output8="-v";;
           esac
       done
-      echo "$output1 $output2 $output3 $output4 $output5 $output6 $output7 $output8" > /usr/bin/.args
+      echo "--cli -f $output1 $output2 $output3 $output4 $output5 $output6 $output7 $output8" > /usr/bin/.args
       /usr/bin/palera1n_menu
   else
       echo "Cancelled"
