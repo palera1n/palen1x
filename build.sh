@@ -151,7 +151,7 @@ cp -av rootfs/boot/vmlinuz-lts iso/boot/vmlinuz
 cat << ! > iso/boot/grub/grub.cfg
 insmod all_video
 echo 'palen1x $VERSION'
-linux /boot/vmlinuz console=tty0 fbcon=nodefer fbcon=logo-count:1
+linux /boot/vmlinuz  quiet loglevel=3
 initrd /boot/initramfs.xz
 boot
 !
