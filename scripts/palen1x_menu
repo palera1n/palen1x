@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Load functions and variables
 . /usr/bin/common
-PALEN1X_VERSION="1.1.0"
 
 export NEWT_COLORS='root=,black
 border=white,black
@@ -22,7 +21,7 @@ whiptail_height="$(($(tput lines) - 6))"
 whiptail_width="$(($(tput cols) - 20))"
 
 while true; do
-  CHOICE="$(whiptail --nocancel --title "palen1x $PALEN1X_VERSION | use arrow keys" --menu '' $whiptail_height $whiptail_width 9 \
+  CHOICE="$(whiptail --nocancel --title "palen1x | use arrow keys" --menu '' $whiptail_height $whiptail_width 9 \
     '1' 'palera1n' \
     '2' 'SSH' \
     '3' 'Shell' \

@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: [ amd64, i686, aarch64, armv7 ]
+        arch: [ x86_64, x86, aarch64, armv7 ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,7 +27,7 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}
         run: |
-          sudo -E ./build.sh RELEASE
+          sudo -E ./build.sh
 
       - name: Prepare artifact
         run: |
