@@ -32,7 +32,7 @@ jobs:
       - name: Prepare artifact
         run: |
           mkdir palen1x
-          cp work/*-${{ matrix.arch }}.iso palen1x
+          cp work/*.iso palen1x
           cp work/iso/boot/initramfs.xz palen1x/initramfs-${{ matrix.arch }}.xz
 
       - name: Upload artifact to cdn.nickchan.lol
