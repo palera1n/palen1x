@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+clear
+
+cat << "EOF"
+Welcome to palen1x!
+
+To get started with using palera1n, please type in `palera1n`!
+To SSH, type `issh`!
+
+EOF

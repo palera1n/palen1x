@@ -2,47 +2,63 @@ name: Build palen1x
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: "palera1n tag"
+        required: true
+        type: string
+      release:
+        description: "Release?"
+        required: true
+        default: false
+        type: boolean
 
 jobs:
   build:
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        arch: [ x86_64, x86, aarch64, armv7 ]
-    runs-on: ubuntu-latest
+        arch: [ x86_64, x86 ]
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Get version
-        id: version
-        run: echo "VERSION=$(cat version)" >> $GITHUB_ENV
-
-      - name: Install qemu-user-static
+      - name: Install dependencies (apt)
         run: |
           sudo apt-get update
-          sudo apt-get install -y qemu-user-static
+          sudo apt-get install -y qemu-user-static wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
+
+      - name: Download palera1n resources
+        run: |
+          URL_BASE="https://github.com/palera1n/palera1n/releases/download/${{ inputs.version }}"
+
+          if curl -fL -o resources/palera1n.tar.gz "$URL_BASE/palera1n-linux-${{ matrix.arch }}.tar.gz"; then
+            echo "Downloaded palera1n.tar.gz"
+          elif curl -fL -o resources/palera1n "$URL_BASE/palera1n-linux-${{ matrix.arch }}"; then
+            echo "Downloaded palera1n"
+            chmod +x resources/palera1n
+          else
+            exit 1
+          fi
 
       - name: Build
         env:
           ARCH: ${{ matrix.arch }}
+          VERSION: ${{ inputs.version }}
         run: |
           sudo -E ./build.sh
 
-      - name: Prepare artifact
-        run: |
-          mkdir palen1x
-          cp work/*.iso palen1x
-          cp work/iso/boot/initramfs.xz palen1x/initramfs-${{ matrix.arch }}.xz
-
-      - name: Upload artifact to cdn.nickchan.lol
-        uses: wangyucode/sftp-upload-action@v1.4.8
+      - name: Create Release
+        if: ${{ inputs.release }}
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65
         with:
-          host: ${{ secrets.NICKCHAN_FTP_HOST }}
-          port: ${{ secrets.NICKCHAN_FTP_PORT }}
-          username: palera1n
-          password: ${{ secrets.NICKCHAN_FTP_PASS }}
-          forceUpload: true
-          dryRun: false
-          localDir: 'palen1x/'
-          remoteDir: '/palera1n/artifacts/palen1x/release'
+          name: v${{ inputs.version }}
+          tag_name: v${{ inputs.version }}
+          files: |
+            work/palen1x-${{ inputs.version }}-${{ matrix.arch }}.iso
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          draft: true
+        env:
+          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}

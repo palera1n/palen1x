@@ -1,14 +1,14 @@
-#!/usr/bin/env bash
-# Load functions and variables
-. /usr/bin/common
-# Display ssh logo
-ssh_logo
+#!/usr/bin/env sh
+
+prompt() {
+  printf '%s' "$1"
+  read -r "$2"
+}
 
 cat << "EOF"
 Connect your iDevice to this computer
 
 The keyboard layout is in American Qwerty.
-Your iDevice's default password is alpine.
 Your iDevice's users are `root` and `mobile`.
 Your iDevice's default port is 22.
 
@@ -18,7 +18,6 @@ prompt 'Port: ' port
 
 clear
 
-blue_echo 'SSHing into your iDevice...'
+echo 'SSHing into your iDevice...'
 ssh -o "ProxyCommand=inetcat $port" -o "UserKnownHostsFile=/dev/null" $user@iPhone || \
-    failed_echo 'Failed to SSH into your iDevice.'
-enter_to_quit
+echo 'Failed to SSH into your iDevice.' >&2
