@@ -12,6 +12,13 @@ on:
         required: true
         default: false
         type: boolean
+  push:
+    tags:
+      - v*
+
+env:
+  TAG: ${{ github.event.inputs.version || github.ref_name }}
+  IS_RELEASE: ${{ github.event.inputs.release || (github.event_name == 'push' && 'true') }}
 
 jobs:
   build:
@@ -31,7 +38,7 @@ jobs:
 
       - name: Download palera1n resources
         run: |
-          URL_BASE="https://github.com/palera1n/palera1n/releases/download/${{ inputs.version }}"
+          URL_BASE="https://github.com/palera1n/palera1n/releases/download/${{ env.TAG }}"
 
           if curl -fL -o resources/palera1n.tar.gz "$URL_BASE/palera1n-linux-${{ matrix.arch }}.tar.gz"; then
             echo "Downloaded palera1n.tar.gz"
@@ -45,18 +52,18 @@ jobs:
       - name: Build
         env:
           ARCH: ${{ matrix.arch }}
-          VERSION: ${{ inputs.version }}
+          VERSION: ${{ env.TAG }}
         run: |
           sudo -E ./build.sh
 
       - name: Create Release
-        if: ${{ inputs.release }}
+        if: ${{ env.IS_RELEASE == 'true' || env.IS_RELEASE == true }}
         uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65
         with:
-          name: v${{ inputs.version }}
-          tag_name: v${{ inputs.version }}
+          name: ${{ env.TAG }}
+          tag_name: ${{ env.TAG }}
           files: |
-            work/palen1x-${{ inputs.version }}-${{ matrix.arch }}.iso
+            work/palen1x-${{ env.TAG }}-${{ matrix.arch }}.iso
           generate_release_notes: true
           fail_on_unmatched_files: true
           draft: true
