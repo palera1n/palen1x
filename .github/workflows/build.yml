@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies (apt)
         run: |
           sudo apt-get update
-          sudo apt-get install -y qemu-user-static wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
+          sudo apt-get install -y qemu-user-binfmt wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev
 
       - name: Download palera1n resources
         run: |
