@@ -38,11 +38,8 @@ jobs:
           fi
 
       - name: Build
-        env:
-          ARCH: ${{ matrix.arch }}
-          VERSION: ${{ env.TAG }}
         run: |
-          sudo -E ./build.sh
+          sudo ARCH="${{ matrix.arch }}" VERSION="${{ env.TAG }}" ./build.sh
 
       - name: Upload
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
